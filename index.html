@@ -94,6 +94,28 @@
       letter-spacing: 0.08em;
     }
 
+    .nav li a {
+      position: relative;
+    }
+
+    .nav li a::after {
+      background: currentColor;
+      bottom: -6px;
+      content: "";
+      height: 2px;
+      left: 0;
+      position: absolute;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 220ms ease;
+      width: 100%;
+    }
+
+    .nav li a:hover::after,
+    .nav li a:focus-visible::after {
+      transform: scaleX(1);
+    }
+
     .nav img {
       height: 42px;
       width: auto;
@@ -113,14 +135,18 @@
     }
 
     .hero-media {
+      animation: media-enter 720ms ease both;
       min-height: calc(100svh - 72px);
       overflow: hidden;
       position: relative;
     }
 
     .hero-media img {
+      animation: hero-drift 18s ease-in-out infinite alternate;
       height: 100%;
       object-fit: cover;
+      transform: scale(1.025);
+      transform-origin: center;
       width: 100%;
     }
 
@@ -129,14 +155,6 @@
       content: "";
       inset: 0;
       position: absolute;
-    }
-
-    .hero-logo {
-      bottom: 34px;
-      left: 34px;
-      position: absolute;
-      width: min(320px, 54vw);
-      z-index: 1;
     }
 
     .hero-panel {
@@ -148,6 +166,10 @@
       display: grid;
       padding: clamp(34px, 5vw, 72px);
       position: relative;
+    }
+
+    .hero-panel > div {
+      animation: panel-enter 760ms 120ms ease both;
     }
 
     .kicker {
@@ -189,7 +211,35 @@
       letter-spacing: 0.08em;
       min-height: 52px;
       min-width: 166px;
+      overflow: hidden;
       padding: 14px 20px;
+      position: relative;
+      transition: background-color 220ms ease, box-shadow 220ms ease, color 220ms ease, transform 220ms ease;
+    }
+
+    .button::after {
+      background: rgba(255,255,255,0.24);
+      content: "";
+      inset: 0;
+      position: absolute;
+      transform: translateX(-110%) skewX(-18deg);
+      transition: transform 520ms cubic-bezier(.2,.8,.2,1);
+      width: 42%;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      box-shadow: 0 14px 28px rgba(0,0,0,0.16);
+      transform: translateY(-2px);
+    }
+
+    .button:hover::after,
+    .button:focus-visible::after {
+      transform: translateX(260%) skewX(-18deg);
+    }
+
+    .button:active {
+      transform: translateY(0);
     }
 
     .button.primary {
@@ -266,9 +316,64 @@
       }
     }
 
+    @keyframes hero-drift {
+      from {
+        transform: scale(1.025) translate3d(-0.6%, 0, 0);
+      }
+
+      to {
+        transform: scale(1.07) translate3d(0.8%, -0.8%, 0);
+      }
+    }
+
+    @keyframes media-enter {
+      from {
+        opacity: 0;
+        transform: scale(0.985);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes panel-enter {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 760ms ease, transform 760ms cubic-bezier(.2,.8,.2,1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     @media (prefers-reduced-motion: reduce) {
-      .ticker {
-        animation: none;
+      *,
+      *::before,
+      *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 1ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
       }
     }
 
@@ -384,6 +489,7 @@
     .menu-item {
       border-bottom: 1px solid rgba(255,255,255,0.18);
       padding: 22px 0;
+      transition: border-color 220ms ease, transform 260ms cubic-bezier(.2,.8,.2,1);
     }
 
     .menu-item:first-child {
@@ -397,6 +503,16 @@
       font-size: 38px;
       gap: 14px;
       justify-content: space-between;
+      transition: color 220ms ease;
+    }
+
+    .menu-item:hover {
+      border-color: rgba(255,255,255,0.42);
+      transform: translateX(8px);
+    }
+
+    .menu-item:hover h3 {
+      color: #f4c656;
     }
 
     .menu-item h3 small {
@@ -454,7 +570,12 @@
     .atelier-photo img {
       height: 100%;
       object-fit: cover;
+      transition: transform 820ms cubic-bezier(.2,.8,.2,1);
       width: 100%;
+    }
+
+    .atelier-photo:hover img {
+      transform: scale(1.035);
     }
 
     .pizza {
@@ -476,7 +597,12 @@
     .pizza-photo img {
       height: 100%;
       object-fit: cover;
+      transition: transform 820ms cubic-bezier(.2,.8,.2,1);
       width: 100%;
+    }
+
+    .pizza-photo:hover img {
+      transform: scale(1.035);
     }
 
     .pizza-card {
@@ -546,7 +672,12 @@
       height: 320px;
       margin: 0 auto;
       object-fit: contain;
+      transition: transform 360ms cubic-bezier(.2,.8,.2,1);
       width: 100%;
+    }
+
+    .bottle-stage figure:hover img {
+      transform: translateY(-8px) rotate(-1.5deg);
     }
 
     .drinks-copy h2 {
@@ -577,7 +708,12 @@
       height: 100%;
       min-height: 360px;
       object-fit: cover;
+      transition: transform 820ms cubic-bezier(.2,.8,.2,1);
       width: 100%;
+    }
+
+    .gallery-grid img:hover {
+      transform: scale(1.035);
     }
 
     .gallery-card {
@@ -806,7 +942,6 @@
     <header class="hero">
       <div class="hero-media">
         <img src="assets/hero-food.jpg" alt="Panozzi et pizza CAVA">
-        <img class="hero-logo" src="assets/logo-cava-white.png" alt="CAVA Italian Street Food">
       </div>
       <div class="hero-panel">
         <div>
@@ -854,7 +989,7 @@
 
     <section id="panozzi">
       <div class="inner">
-        <div class="section-head">
+        <div class="section-head reveal">
           <h2>Le panozzo, version CAVA</h2>
           <p>
             Pas un sandwich froid pose dans une vitrine. Un pain chaud, des crèmes maison,
@@ -863,7 +998,7 @@
           </p>
         </div>
         <div class="panozzi-layout">
-          <article class="signature-card">
+          <article class="signature-card reveal">
             <figure>
               <img src="assets/pistacchioso.jpg" alt="Panozzo Pistacchioso">
             </figure>
@@ -878,7 +1013,7 @@
             </div>
           </article>
 
-          <div class="menu-list">
+          <div class="menu-list reveal">
             <article class="menu-item">
               <h3>Italiano Vero <small>Gorgonzola / Parma / Bufala</small></h3>
               <p>Creme de gorgonzola maison, jambon cru 24 mois, mozzarella de bufflonne AOP, roquette, tomates roties.</p>
@@ -902,7 +1037,7 @@
 
     <section class="atelier">
       <div class="inner atelier-grid">
-        <div class="atelier-copy">
+        <div class="atelier-copy reveal">
           <div class="kicker">L'esprit du lieu</div>
           <h2>Italie rapide, pas anonyme.</h2>
           <p>
@@ -912,7 +1047,7 @@
             pratiques visibles sans chercher.
           </p>
         </div>
-        <figure class="atelier-photo">
+        <figure class="atelier-photo reveal">
           <img src="assets/team-photo.jpg" alt="Equipe CAVA au comptoir">
         </figure>
       </div>
@@ -920,10 +1055,10 @@
 
     <section class="pizza" id="pizza">
       <div class="inner pizza-grid">
-        <figure class="pizza-photo">
+        <figure class="pizza-photo reveal">
           <img src="assets/pizza-margherita.jpg" alt="Pizza Margherita CAVA">
         </figure>
-        <div class="pizza-card">
+        <div class="pizza-card reveal">
           <div class="kicker">Pizza alla pala</div>
           <h2>Une part maintenant, une entiere ce soir.</h2>
           <div class="slice-row">
@@ -956,7 +1091,7 @@
 
     <section id="drinks">
       <div class="inner drinks-grid">
-        <div class="bottle-stage">
+        <div class="bottle-stage reveal">
           <figure>
             <img src="assets/aranciata-macario.png" alt="Aranciata Macario">
           </figure>
@@ -964,7 +1099,7 @@
             <img src="assets/limonata-macario.png" alt="Limonata Macario">
           </figure>
         </div>
-        <div class="drinks-copy">
+        <div class="drinks-copy reveal">
           <div class="kicker">Bibite italiane</div>
           <h2>La fraicheur qui va avec.</h2>
           <p>
@@ -978,9 +1113,9 @@
 
     <section class="gallery">
       <div class="inner gallery-grid">
-        <img src="assets/pizza-francesca.jpg" alt="Pizza CAVA">
-        <img src="assets/italiano-vero.jpg" alt="Panozzo Italiano Vero">
-        <article class="gallery-card">
+        <img class="reveal" src="assets/pizza-francesca.jpg" alt="Pizza CAVA">
+        <img class="reveal" src="assets/italiano-vero.jpg" alt="Panozzo Italiano Vero">
+        <article class="gallery-card reveal">
           <div>
             <div class="kicker">A faire vivre</div>
             <h2>Photos, actus, avis.</h2>
@@ -995,7 +1130,7 @@
     </section>
 
     <section class="visit">
-      <div class="inner visit-grid">
+      <div class="inner visit-grid reveal">
         <div>
           <div class="kicker">Sur place, a emporter, click & collect</div>
           <h2>On se voit rue d'Amsterdam.</h2>
@@ -1020,5 +1155,25 @@
       Preview site concept - CAVA
     </p>
   </footer>
+  <script>
+    const revealItems = document.querySelectorAll(".reveal");
+
+    if ("IntersectionObserver" in window) {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.14, rootMargin: "0px 0px -8% 0px" });
+
+      revealItems.forEach((item) => revealObserver.observe(item));
+    } else {
+      revealItems.forEach((item) => item.classList.add("is-visible"));
+    }
+  </script>
 </body>
 </html>
