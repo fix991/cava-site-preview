@@ -655,31 +655,30 @@
     }
 
     .bottle-stage {
-      background: #fff;
+      background: transparent;
       display: grid;
-      gap: 18px;
+      gap: 16px;
       grid-template-columns: repeat(2, 1fr);
-      padding: clamp(22px, 3vw, 34px);
+      padding: 0;
     }
 
     .bottle-stage figure {
-      align-items: end;
-      background: var(--paper-2);
-      display: flex;
-      min-height: 390px;
-      padding: 26px;
+      aspect-ratio: 0.74;
+      background: #fff;
+      min-height: 430px;
+      overflow: hidden;
     }
 
     .bottle-stage img {
-      height: 320px;
-      margin: 0 auto;
-      object-fit: contain;
+      display: block;
+      height: 100%;
+      object-fit: cover;
       transition: transform 360ms cubic-bezier(.2,.8,.2,1);
       width: 100%;
     }
 
     .bottle-stage figure:hover img {
-      transform: translateY(-8px) rotate(-1.5deg);
+      transform: scale(1.045);
     }
 
     .drinks-copy h2 {
