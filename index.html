@@ -696,6 +696,144 @@
       max-width: 620px;
     }
 
+    .full-menu {
+      background: #fff;
+    }
+
+    .menu-shell {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: 0.78fr 1.22fr;
+    }
+
+    .menu-intro {
+      align-content: start;
+      background: var(--green);
+      color: #fff;
+      display: grid;
+      min-height: 520px;
+      padding: clamp(30px, 4vw, 52px);
+      position: sticky;
+      top: 92px;
+    }
+
+    .menu-intro h2 {
+      color: var(--gold);
+      font-size: clamp(62px, 7vw, 108px);
+      margin-bottom: 22px;
+    }
+
+    .menu-intro p {
+      color: rgba(255,255,255,0.78);
+      font-size: 16px;
+      font-weight: 650;
+      line-height: 1.7;
+      max-width: 420px;
+    }
+
+    .menu-columns {
+      display: grid;
+      gap: 18px;
+    }
+
+    .menu-category {
+      border: 1px solid var(--line);
+      display: grid;
+      padding: clamp(24px, 3vw, 34px);
+    }
+
+    .menu-category.dark {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: #fff;
+    }
+
+    .menu-category h3 {
+      color: var(--tomato);
+      font-size: clamp(38px, 4vw, 58px);
+      margin-bottom: 8px;
+    }
+
+    .menu-category.dark h3 {
+      color: var(--gold);
+    }
+
+    .menu-category > p {
+      color: var(--soft);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.55;
+      margin-bottom: 18px;
+    }
+
+    .menu-category.dark > p {
+      color: rgba(255,255,255,0.68);
+    }
+
+    .menu-row {
+      border-top: 1px solid var(--line);
+      display: grid;
+      gap: 14px;
+      grid-template-columns: minmax(0, 1fr) auto;
+      padding: 16px 0;
+    }
+
+    .menu-category.dark .menu-row {
+      border-color: rgba(255,255,255,0.16);
+    }
+
+    .menu-row h4 {
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .menu-row p {
+      color: var(--soft);
+      font-size: 13px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin-top: 6px;
+    }
+
+    .menu-category.dark .menu-row p {
+      color: rgba(255,255,255,0.68);
+    }
+
+    .menu-price {
+      color: var(--green);
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 31px;
+      white-space: nowrap;
+    }
+
+    .menu-category.dark .menu-price {
+      color: var(--gold);
+    }
+
+    .build-box {
+      background: var(--paper-2);
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+      padding: 18px;
+    }
+
+    .build-box strong {
+      display: block;
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 28px;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+
+    .build-box span {
+      color: var(--soft);
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.55;
+    }
+
     .gallery {
       background: var(--paper-2);
     }
@@ -890,6 +1028,7 @@
       .pizza-grid,
       .drinks-grid,
       .gallery-grid,
+      .menu-shell,
       .visit-grid,
       .section-head {
         grid-template-columns: 1fr;
@@ -921,6 +1060,11 @@
       .signature-copy {
         opacity: 1;
         transform: none;
+      }
+
+      .menu-intro {
+        min-height: auto;
+        position: static;
       }
     }
 
@@ -1000,9 +1144,7 @@
 <body>
   <nav class="nav" aria-label="Navigation principale">
     <ul>
-      <li><a href="#panozzi">Panozzi</a></li>
-      <li><a href="#pizza">Pizza</a></li>
-      <li><a href="#drinks">Bibite</a></li>
+      <li><a href="#menu">Menu</a></li>
     </ul>
     <a href="#top" aria-label="CAVA">
       <img src="/cava-site-preview/assets/logo-cava.png?v=visible-20260704" alt="CAVA Italian Street Food">
@@ -1029,7 +1171,7 @@
           </p>
           <div class="actions">
             <a class="button primary" href="https://mylightspeed.app/GZRCHQJG/C-ordering/menu" target="_blank" rel="noreferrer">Click & Collect</a>
-            <a class="button" href="#panozzi">Voir la carte</a>
+            <a class="button" href="#menu">Voir le menu</a>
           </div>
           <div class="meta" aria-label="Informations pratiques">
             <div>
@@ -1182,6 +1324,51 @@
             italienne, lisible, pensee pour completer les formules sans voler la vedette
             au produit.
           </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="full-menu" id="menu">
+      <div class="inner menu-shell reveal">
+        <aside class="menu-intro">
+          <div>
+            <div class="kicker">Menu CAVA</div>
+            <h2>La carte complete, sans détour.</h2>
+            <p>
+              Panozzi, pizza, salades, dolci et boissons: ouvre directement notre menu officiel,
+              choisis, commande, passe au comptoir.
+            </p>
+            <div class="actions">
+              <a class="button primary" href="https://mylightspeed.app/GZRCHQJG/C-ordering/menu" target="_blank" rel="noreferrer">Voir le menu</a>
+              <a class="button" href="https://mylightspeed.app/GZRCHQJG/C-ordering/menu" target="_blank" rel="noreferrer">Commander</a>
+            </div>
+          </div>
+        </aside>
+
+        <div class="menu-category dark">
+          <h3>Menu officiel</h3>
+          <p>Le lien ouvre la carte CAVA en ligne, avec les produits et prix à jour.</p>
+          <div class="menu-row">
+            <div>
+              <h4>Panozzi</h4>
+              <p>Signature, piccolo, grande, sur mesure.</p>
+            </div>
+            <div class="menu-price">Voir</div>
+          </div>
+          <div class="menu-row">
+            <div>
+              <h4>Pizza</h4>
+              <p>À la part ou entière, selon la faim du moment.</p>
+            </div>
+            <div class="menu-price">Voir</div>
+          </div>
+          <div class="menu-row">
+            <div>
+              <h4>Dolci & bibite</h4>
+              <p>Le petit truc en plus qui finit bien la commande.</p>
+            </div>
+            <div class="menu-price">Voir</div>
+          </div>
         </div>
       </div>
     </section>
