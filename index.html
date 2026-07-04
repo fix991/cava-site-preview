@@ -726,18 +726,91 @@
       padding: 34px;
     }
 
-    .gallery-card h2 {
-      align-self: end;
-      color: var(--gold);
-      font-size: clamp(46px, 5vw, 74px);
+    .review-board {
+      align-content: space-between;
+      display: grid;
+      gap: 28px;
+      height: 100%;
     }
 
-    .gallery-card p {
+    .review-board h2 {
+      color: var(--gold);
+      font-size: clamp(42px, 4.6vw, 68px);
+      line-height: 0.95;
+      max-width: 7ch;
+    }
+
+    .review-label {
+      align-items: center;
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .google-chip {
+      border: 1px solid rgba(255,255,255,0.28);
+      color: rgba(255,255,255,0.82);
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0.12em;
+      padding: 7px 9px;
+      text-transform: uppercase;
+    }
+
+    .stars {
+      color: var(--gold);
+      font-family: "Inter", sans-serif;
+      font-size: 18px;
+      letter-spacing: 0.12em;
+      min-height: 25px;
+    }
+
+    .review-text {
       color: rgba(255,255,255,0.78);
-      font-size: 15px;
+      font-size: 17px;
       font-weight: 650;
-      line-height: 1.65;
-      margin-top: 20px;
+      line-height: 1.7;
+      margin-top: 22px;
+    }
+
+    .review-note {
+      color: rgba(255,255,255,0.54);
+      font-family: "Inter", sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      margin-top: 16px;
+      text-transform: uppercase;
+    }
+
+    .review-meta {
+      border-top: 1px solid rgba(255,255,255,0.2);
+      display: flex;
+      gap: 16px;
+      justify-content: space-between;
+      padding-top: 18px;
+    }
+
+    .review-meta strong,
+    .review-meta span {
+      display: block;
+      font-family: "Inter", sans-serif;
+    }
+
+    .review-meta strong {
+      color: #fff;
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    .review-meta span {
+      color: rgba(255,255,255,0.62);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      margin-top: 5px;
+      text-transform: uppercase;
     }
 
     .visit {
@@ -1118,14 +1191,29 @@
         <img class="reveal" src="/cava-site-preview/assets/pizza-francesca.jpg?v=visible-20260704" alt="Pizza CAVA">
         <img class="reveal" src="/cava-site-preview/assets/italiano-vero.jpg?v=visible-20260704" alt="Panozzo Italiano Vero">
         <article class="gallery-card reveal">
-          <div>
-            <div class="kicker">A faire vivre</div>
-            <h2>Photos, actus, avis.</h2>
-            <p>
-              La version finale peut intégrer les avis Google, les posts Instagram,
-              les nouveautés de la carte et les messages du moment: horaires, titres
-              restaurant, livraison, promo bureaux voisins.
-            </p>
+          <div class="review-board" aria-live="polite">
+            <div>
+              <div class="review-label">
+                <div class="kicker">Avis Google</div>
+                <span class="google-chip">Live</span>
+              </div>
+              <h2>Ce qu'ils disent de CAVA</h2>
+              <div class="stars" id="review-stars" aria-label="Note Google">★★★★★</div>
+              <p class="review-text" id="review-text">
+                Panozzi chauds, pizza genereuse, service direct. Ici, le dernier avis Google prendra la parole automatiquement.
+              </p>
+              <p class="review-note" id="review-note">Connecte au flux Google Reviews</p>
+            </div>
+            <div class="review-meta">
+              <div>
+                <strong id="review-author">Clients CAVA</strong>
+                <span id="review-date">Mise a jour auto</span>
+              </div>
+              <div>
+                <strong id="review-rating">5.0</strong>
+                <span>Source</span>
+              </div>
+            </div>
           </div>
         </article>
       </div>
@@ -1176,6 +1264,26 @@
     } else {
       revealItems.forEach((item) => item.classList.add("is-visible"));
     }
+
+    const reviewUrl = "/cava-site-preview/data/latest-google-review.json?v=" + Date.now();
+    fetch(reviewUrl)
+      .then((response) => response.ok ? response.json() : null)
+      .then((review) => {
+        if (!review || !review.text) {
+          return;
+        }
+
+        const rating = Number(review.rating || 0);
+        const roundedRating = Math.max(0, Math.min(5, Math.round(rating)));
+        const stars = roundedRating > 0 ? "★".repeat(roundedRating) + "☆".repeat(5 - roundedRating) : "★★★★★";
+
+        document.getElementById("review-stars").textContent = stars;
+        document.getElementById("review-text").textContent = review.text;
+        document.getElementById("review-author").textContent = review.author || "Client Google";
+        document.getElementById("review-date").textContent = review.date || "Dernier avis";
+        document.getElementById("review-rating").textContent = rating > 0 ? rating.toFixed(1) : "Google";
+      })
+      .catch(() => {});
   </script>
 </body>
 </html>
