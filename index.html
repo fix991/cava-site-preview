@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <script>document.documentElement.classList.add("js");</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CAVA Italian Street Food - Preview</title>
@@ -161,7 +162,7 @@
       align-content: center;
       background:
         linear-gradient(rgba(16, 60, 41, 0.94), rgba(16, 60, 41, 0.94)),
-        url("assets/banner-cava.png") center / cover;
+        url("/cava-site-preview/assets/banner-cava.png?v=visible-20260704") center / cover;
       color: #fff;
       display: grid;
       padding: clamp(34px, 5vw, 72px);
@@ -350,13 +351,13 @@
       }
     }
 
-    .reveal {
+    .js .reveal {
       opacity: 0;
       transform: translateY(26px);
       transition: opacity 760ms ease, transform 760ms cubic-bezier(.2,.8,.2,1);
     }
 
-    .reveal.is-visible {
+    .js .reveal.is-visible {
       opacity: 1;
       transform: translateY(0);
     }
@@ -371,6 +372,7 @@
         transition-duration: 1ms !important;
       }
 
+      .js .reveal,
       .reveal {
         opacity: 1;
         transform: none;
@@ -930,7 +932,7 @@
       <li><a href="#drinks">Bibite</a></li>
     </ul>
     <a href="#top" aria-label="CAVA">
-      <img src="assets/logo-cava.png" alt="CAVA Italian Street Food">
+      <img src="/cava-site-preview/assets/logo-cava.png?v=visible-20260704" alt="CAVA Italian Street Food">
     </a>
     <ul>
       <li><a href="https://www.instagram.com/cavaitalianstreetfood" target="_blank" rel="noreferrer">Instagram</a></li>
@@ -941,7 +943,7 @@
   <main id="top">
     <header class="hero">
       <div class="hero-media">
-        <img src="assets/hero-food.jpg" alt="Panozzi et pizza CAVA">
+        <img src="/cava-site-preview/assets/hero-food.jpg?v=visible-20260704" alt="Panozzi et pizza CAVA">
       </div>
       <div class="hero-panel">
         <div>
@@ -1000,7 +1002,7 @@
         <div class="panozzi-layout">
           <article class="signature-card reveal">
             <figure>
-              <img src="assets/pistacchioso.jpg" alt="Panozzo Pistacchioso">
+              <img src="/cava-site-preview/assets/pistacchioso.jpg?v=visible-20260704" alt="Panozzo Pistacchioso">
             </figure>
             <div class="signature-copy">
               <div class="kicker">Signature</div>
@@ -1048,7 +1050,7 @@
           </p>
         </div>
         <figure class="atelier-photo reveal">
-          <img src="assets/team-photo.jpg" alt="Equipe CAVA au comptoir">
+          <img src="/cava-site-preview/assets/team-photo.jpg?v=visible-20260704" alt="Equipe CAVA au comptoir">
         </figure>
       </div>
     </section>
@@ -1056,7 +1058,7 @@
     <section class="pizza" id="pizza">
       <div class="inner pizza-grid">
         <figure class="pizza-photo reveal">
-          <img src="assets/pizza-margherita.jpg?v=slices-20260704" alt="Pizza Margherita CAVA">
+          <img src="/cava-site-preview/assets/pizza-margherita.jpg?v=visible-20260704" alt="Pizza Margherita CAVA">
         </figure>
         <div class="pizza-card reveal">
           <div class="kicker">Pizza alla pala</div>
@@ -1093,10 +1095,10 @@
       <div class="inner drinks-grid">
         <div class="bottle-stage reveal">
           <figure>
-            <img src="assets/aranciata-macario.png" alt="Aranciata Macario">
+            <img src="/cava-site-preview/assets/aranciata-macario.png?v=visible-20260704" alt="Aranciata Macario">
           </figure>
           <figure>
-            <img src="assets/limonata-macario.png" alt="Limonata Macario">
+            <img src="/cava-site-preview/assets/limonata-macario.png?v=visible-20260704" alt="Limonata Macario">
           </figure>
         </div>
         <div class="drinks-copy reveal">
@@ -1113,8 +1115,8 @@
 
     <section class="gallery">
       <div class="inner gallery-grid">
-        <img class="reveal" src="assets/pizza-francesca.jpg" alt="Pizza CAVA">
-        <img class="reveal" src="assets/italiano-vero.jpg" alt="Panozzo Italiano Vero">
+        <img class="reveal" src="/cava-site-preview/assets/pizza-francesca.jpg?v=visible-20260704" alt="Pizza CAVA">
+        <img class="reveal" src="/cava-site-preview/assets/italiano-vero.jpg?v=visible-20260704" alt="Panozzo Italiano Vero">
         <article class="gallery-card reveal">
           <div>
             <div class="kicker">A faire vivre</div>
@@ -1149,7 +1151,7 @@
 
   <footer>
     <p>47 Rue d'Amsterdam<br>75008 Paris</p>
-    <img src="assets/logo-cava-white.png" alt="CAVA Italian Street Food">
+    <img src="/cava-site-preview/assets/logo-cava-white.png?v=visible-20260704" alt="CAVA Italian Street Food">
     <p class="right">
       <a href="https://www.instagram.com/cavaitalianstreetfood" target="_blank" rel="noreferrer">@cavaitalianstreetfood</a><br>
       Preview site concept - CAVA
