@@ -381,7 +381,7 @@
 
     section {
       padding: clamp(68px, 8vw, 116px) 28px;
-      scroll-margin-top: 86px;
+      scroll-margin-top: 118px;
     }
 
     .inner {
@@ -1151,6 +1151,14 @@
         display: none;
       }
 
+      .nav > a {
+        display: block !important;
+      }
+
+      .nav > a img {
+        display: block !important;
+      }
+
       .nav {
         gap: 12px;
       }
@@ -1206,6 +1214,10 @@
         grid-template-columns: 1fr;
       }
 
+      .drinks-copy {
+        order: -1;
+      }
+
       footer {
         grid-template-columns: 1fr;
         text-align: center;
@@ -1225,8 +1237,9 @@
   <nav class="nav" aria-label="Navigation principale">
     <ul>
       <li><a href="#menu">Menu</a></li>
+      <li><a href="#produits">Produits</a></li>
       <li><a href="#pizza">Pizza</a></li>
-      <li><a href="#drinks">Bevande</a></li>
+      <li><a href="#drinks">Boissons</a></li>
     </ul>
     <a href="#top" aria-label="CAVA">
       <img src="/cava-site-preview/assets/logo-cava.png?v=visible-20260704" alt="CAVA Italian Street Food">
@@ -1247,8 +1260,8 @@
           <div class="kicker">Italian street food - Paris Saint-Lazare</div>
           <h1>La pause italienne, bien faite.</h1>
           <p class="hero-lede">
-            Panozzi chauds, pizza a la part, ingredients italiens et recettes maison.
-            CAVA est l'adresse simple et genereuse du 47 rue d'Amsterdam: on passe, on compose,
+            Panozzi chauds, pizza à la part, ingrédients italiens et recettes maison.
+            CAVA est l'adresse simple et généreuse du 47 rue d'Amsterdam: on passe, on compose,
             on emporte, on revient.
           </p>
           <div class="actions">
@@ -1265,7 +1278,7 @@
               <strong>Tous les jours</strong>
             </div>
             <div>
-              <span>Telephone</span>
+              <span>Téléphone</span>
               <strong>07 81 70 75 34</strong>
             </div>
           </div>
@@ -1276,12 +1289,12 @@
     <div class="ticker-wrap" aria-hidden="true">
       <div class="ticker">
         <span>Panozzo caldo</span>
-        <span>Pizza a la part</span>
-        <span>Creme maison</span>
+        <span>Pizza à la part</span>
+        <span>Crème maison</span>
         <span>Mortadella, bufala, pistacchio</span>
         <span>Panozzo caldo</span>
-        <span>Pizza a la part</span>
-        <span>Creme maison</span>
+        <span>Pizza à la part</span>
+        <span>Crème maison</span>
         <span>Mortadella, bufala, pistacchio</span>
       </div>
     </div>
@@ -1291,9 +1304,9 @@
         <div class="section-head reveal">
           <h2>Le panozzo, version CAVA</h2>
           <p>
-            Pas un sandwich froid pose dans une vitrine. Un pain chaud, des crèmes maison,
+            Pas un sandwich froid posé dans une vitrine. Un pain chaud, des crèmes maison,
             des produits italiens et des recettes lisibles. Le genre de pause qui marche
-            a midi, le soir, ou entre deux trains.
+            à midi, le soir, ou entre deux trains.
           </p>
         </div>
         <div class="panozzi-layout">
@@ -1305,8 +1318,8 @@
               <div class="kicker">Signature</div>
               <h3>Pistacchioso</h3>
               <p>
-                Pesto de pistache, mortadelle a la truffe, burrata, eclats de pistache
-                et huile d'olive vierge extra. Riche, gourmand, tres CAVA.
+                Pesto de pistache, mortadelle à la truffe, burrata, éclats de pistache
+                et huile d'olive vierge extra. Riche, gourmand, très CAVA.
               </p>
               <a class="button dark" href="https://mylightspeed.app/GZRCHQJG/C-ordering/menu" target="_blank" rel="noreferrer">Commander</a>
             </div>
@@ -1315,19 +1328,19 @@
           <div class="menu-list reveal">
             <article class="menu-item">
               <h3>Italiano Vero <small>Gorgonzola / Parma / Bufala</small></h3>
-              <p>Creme de gorgonzola maison, jambon cru 24 mois, mozzarella de bufflonne AOP, roquette, tomates roties.</p>
+              <p>Crème de gorgonzola maison, jambon cru 24 mois, mozzarella de bufflonne AOP, roquette, tomates rôties.</p>
             </article>
             <article class="menu-item">
               <h3>Compare <small>Piccante / Provolone</small></h3>
-              <p>Creme d'oignons rouges bio, spianata piccante, provolone, roquette et poivrons rotis.</p>
+              <p>Crème d'oignons rouges bio, spianata piccante, provolone, roquette et poivrons rôtis.</p>
             </article>
             <article class="menu-item">
               <h3>Veggie Friend <small>Artichaut / Noisette</small></h3>
-              <p>Houmous tomate, roquette, coeurs d'artichauts, eclats de noisette et olives noires.</p>
+              <p>Houmous tomate, roquette, cœurs d'artichauts, éclats de noisette et olives noires.</p>
             </article>
             <article class="menu-item">
               <h3>Sur mesure <small>Composer</small></h3>
-              <p>Base, fromage, charcuterie, legumes, creme et extra. Le CAVA a ton rythme.</p>
+              <p>Base, fromage, charcuterie, légumes, crème et extra. Le CAVA à ton rythme.</p>
             </article>
           </div>
         </div>
@@ -1341,24 +1354,24 @@
             <div class="kicker">Nos produits</div>
             <h2>Italie en base, local en frais.</h2>
             <p>
-              Chez CAVA, la carte part de produits italiens choisis pour leur gout:
-              charcuteries, fromages, huiles et recettes simples. Les legumes frais
-              sont locaux et bio, travailles au rythme des arrivages du moment.
+              Chez CAVA, la carte part de produits italiens choisis pour leur goût:
+              charcuteries, fromages, huiles et recettes simples. Les légumes frais
+              sont locaux et bio selon les arrivages du moment.
             </p>
           </div>
         </div>
         <div class="sourcing-list reveal">
           <div class="sourcing-row">
             <strong>Italie</strong>
-            <span>Mortadella, jambon cru, mozzarella de bufflonne, provolone, gorgonzola et produits d'epicerie italienne.</span>
+            <span>Mortadella, jambon cru, mozzarella de bufflonne, provolone, gorgonzola et produits d'épicerie italienne.</span>
           </div>
           <div class="sourcing-row">
             <strong>Local & bio</strong>
-            <span>Roquette, tomates, poivrons, artichauts et legumes de saison viennent de filieres locales et bio.</span>
+            <span>Roquette, tomates, poivrons, artichauts et légumes de saison viennent de filières locales et bio selon les arrivages.</span>
           </div>
           <div class="sourcing-row">
             <strong>Maison</strong>
-            <span>Cremes, pesto, houmous et compositions sont prepares pour rester lisibles: peu de bruit, beaucoup de gout.</span>
+            <span>Crèmes, pesto, houmous et compositions sont préparés pour rester lisibles: peu de bruit, beaucoup de goût.</span>
           </div>
         </div>
       </div>
@@ -1371,13 +1384,13 @@
           <h2>Italie rapide, pas anonyme.</h2>
           <p>
             CAVA doit rester direct: une enseigne de quartier, un comptoir, des recettes
-            gourmandes et une vraie identite visuelle. Le site peut reprendre ce ton:
+            gourmandes et une vraie identité visuelle. Le site peut reprendre ce ton:
             peu de bla-bla, beaucoup de produit, une commande facile et des informations
             pratiques visibles sans chercher.
           </p>
         </div>
         <figure class="atelier-photo reveal">
-          <img src="/cava-site-preview/assets/team-photo.jpg?v=visible-20260704" alt="Equipe CAVA au comptoir">
+          <img src="/cava-site-preview/assets/team-photo.jpg?v=visible-20260704" alt="Équipe CAVA au comptoir">
         </figure>
       </div>
     </section>
@@ -1389,7 +1402,7 @@
         </figure>
         <div class="pizza-card reveal">
           <div class="kicker">Pizza alla pala</div>
-          <h2>Une part maintenant, une entiere ce soir.</h2>
+          <h2>Une part maintenant, une entière ce soir.</h2>
           <div class="slice-row">
             <div>
               <h3>2 slices</h3>
@@ -1400,14 +1413,14 @@
           <div class="slice-row">
             <div>
               <h3>3 slices</h3>
-              <p>Le bon format quand la journee est longue.</p>
+              <p>Le bon format quand la journée est longue.</p>
             </div>
             <div class="price">12.50€</div>
           </div>
           <div class="slice-row">
             <div>
               <h3>4 slices</h3>
-              <p>Le format genereux, a partager ou a garder pour soi.</p>
+              <p>Le format généreux, à partager ou à garder pour soi.</p>
             </div>
             <div class="price">16€</div>
           </div>
@@ -1429,11 +1442,11 @@
           </figure>
         </div>
         <div class="drinks-copy reveal">
-          <div class="kicker">Bibite italiane</div>
-          <h2>La fraicheur qui va avec.</h2>
+          <div class="kicker">Boissons italiennes</div>
+          <h2>La fraîcheur qui va avec.</h2>
           <p>
-            Macario, San Pellegrino, limonata, aranciata, cafe. Une carte boisson simple,
-            italienne, lisible, pensee pour completer les formules sans voler la vedette
+            Macario, San Pellegrino, limonata, aranciata, café. Une carte boisson simple,
+            italienne, lisible, pensée pour compléter les formules sans voler la vedette
             au produit.
           </p>
         </div>
@@ -1445,7 +1458,7 @@
         <aside class="menu-intro">
           <div>
             <div class="kicker">Menu CAVA</div>
-            <h2>La carte complete, sans détour.</h2>
+            <h2>La carte complète, sans détour.</h2>
             <p>
               Panozzi, pizza, salades, dolci et boissons: ouvre directement notre menu officiel,
               choisis, commande, passe au comptoir.
@@ -1476,7 +1489,7 @@
           </div>
           <div class="menu-row">
             <div>
-              <h4>Dolci & bibite</h4>
+              <h4>Dolci & boissons</h4>
               <p>Le petit truc en plus qui finit bien la commande.</p>
             </div>
             <div class="menu-price">Voir</div>
@@ -1499,14 +1512,14 @@
               <h2>Ce qu'ils disent de CAVA</h2>
               <div class="stars" id="review-stars" aria-label="Note Google">★★★★★</div>
               <p class="review-text" id="review-text">
-                Panozzi chauds, pizza genereuse, service direct. Ici, le dernier avis Google prendra la parole automatiquement.
+                Panozzi chauds, pizza généreuse, service direct. Ici, le dernier avis Google prendra la parole automatiquement.
               </p>
-              <p class="review-note" id="review-note">Connecte au flux Google Reviews</p>
+              <p class="review-note" id="review-note">Connecté au flux Google Reviews</p>
             </div>
             <div class="review-meta">
               <div>
                 <strong id="review-author">Clients CAVA</strong>
-                <span id="review-date">Mise a jour auto</span>
+                <span id="review-date">Mise à jour auto</span>
               </div>
               <div>
                 <strong id="review-rating">5.0</strong>
@@ -1518,10 +1531,10 @@
       </div>
     </section>
 
-    <section class="visit">
+    <section class="visit" id="visit">
       <div class="inner visit-grid reveal">
         <div>
-          <div class="kicker">Sur place, a emporter, click & collect</div>
+          <div class="kicker">Sur place, à emporter, click & collect</div>
           <h2>On se voit rue d'Amsterdam.</h2>
           <p>
             47 rue d'Amsterdam, 75008 Paris. Commande en ligne, viens chercher chaud,
@@ -1530,7 +1543,7 @@
         </div>
         <div class="actions">
           <a class="button primary" href="https://mylightspeed.app/GZRCHQJG/C-ordering/menu" target="_blank" rel="noreferrer">Click & Collect</a>
-          <a class="button" href="https://www.google.com/maps/search/?api=1&query=47%20Rue%20d%27Amsterdam%2075008%20Paris" target="_blank" rel="noreferrer">Itineraire</a>
+          <a class="button" href="https://www.google.com/maps/search/?api=1&query=47%20Rue%20d%27Amsterdam%2075008%20Paris" target="_blank" rel="noreferrer">Itinéraire</a>
         </div>
       </div>
     </section>
