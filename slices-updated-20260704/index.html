@@ -381,6 +381,7 @@
 
     section {
       padding: clamp(68px, 8vw, 116px) 28px;
+      scroll-margin-top: 86px;
     }
 
     .inner {
@@ -536,6 +537,73 @@
 
     .atelier {
       background: #fff;
+    }
+
+    .sourcing {
+      background: var(--paper);
+    }
+
+    .sourcing-grid {
+      align-items: stretch;
+      display: grid;
+      gap: 18px;
+      grid-template-columns: 0.92fr 1.08fr;
+    }
+
+    .sourcing-statement {
+      background: var(--green);
+      color: #fff;
+      display: grid;
+      min-height: 500px;
+      padding: clamp(34px, 5vw, 64px);
+    }
+
+    .sourcing-statement h2 {
+      color: var(--gold);
+      font-size: clamp(58px, 7vw, 108px);
+      margin-bottom: 22px;
+    }
+
+    .sourcing-statement p {
+      color: rgba(255,255,255,0.8);
+      font-size: 17px;
+      font-weight: 650;
+      line-height: 1.75;
+      max-width: 540px;
+    }
+
+    .sourcing-list {
+      background: #fff;
+      display: grid;
+      padding: clamp(28px, 4vw, 52px);
+    }
+
+    .sourcing-row {
+      border-top: 1px solid var(--line);
+      display: grid;
+      gap: 18px;
+      grid-template-columns: 0.38fr 1fr;
+      padding: clamp(22px, 3vw, 34px) 0;
+    }
+
+    .sourcing-row:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .sourcing-row strong {
+      color: var(--tomato);
+      font-family: "Bebas Neue", sans-serif;
+      font-size: clamp(34px, 3.8vw, 54px);
+      font-weight: 400;
+      line-height: .95;
+    }
+
+    .sourcing-row span {
+      color: var(--soft);
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.65;
     }
 
     .atelier-grid {
@@ -1025,6 +1093,7 @@
       .hero,
       .panozzi-layout,
       .signature-card,
+      .sourcing-grid,
       .atelier-grid,
       .pizza-grid,
       .drinks-grid,
@@ -1067,6 +1136,14 @@
         min-height: auto;
         position: static;
       }
+
+      .sourcing-statement {
+        min-height: auto;
+      }
+
+      .sourcing-row {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 620px) {
@@ -1080,6 +1157,8 @@
 
       .hero-panel,
       .menu-list,
+      .sourcing-statement,
+      .sourcing-list,
       .atelier-copy,
       .pizza-card,
       .gallery-card {
@@ -1250,6 +1329,36 @@
               <h3>Sur mesure <small>Composer</small></h3>
               <p>Base, fromage, charcuterie, legumes, creme et extra. Le CAVA a ton rythme.</p>
             </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sourcing" id="produits">
+      <div class="inner sourcing-grid">
+        <div class="sourcing-statement reveal">
+          <div>
+            <div class="kicker">Nos produits</div>
+            <h2>Italie en base, local en frais.</h2>
+            <p>
+              Chez CAVA, la carte part de produits italiens choisis pour leur gout:
+              charcuteries, fromages, huiles et recettes simples. Les legumes frais
+              sont locaux et bio, travailles au rythme des arrivages du moment.
+            </p>
+          </div>
+        </div>
+        <div class="sourcing-list reveal">
+          <div class="sourcing-row">
+            <strong>Italie</strong>
+            <span>Mortadella, jambon cru, mozzarella de bufflonne, provolone, gorgonzola et produits d'epicerie italienne.</span>
+          </div>
+          <div class="sourcing-row">
+            <strong>Local & bio</strong>
+            <span>Roquette, tomates, poivrons, artichauts et legumes de saison viennent de filieres locales et bio.</span>
+          </div>
+          <div class="sourcing-row">
+            <strong>Maison</strong>
+            <span>Cremes, pesto, houmous et compositions sont prepares pour rester lisibles: peu de bruit, beaucoup de gout.</span>
           </div>
         </div>
       </div>
