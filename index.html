@@ -1752,7 +1752,7 @@
       menuToggles.forEach((button) => {
         const isActive = button.dataset.menuTarget === category;
         button.setAttribute("aria-expanded", String(isActive));
-        button.textContent = isActive ? "Fermer" : "Voir";
+        button.textContent = "Voir";
       });
 
       if (!menuPreview) return;
