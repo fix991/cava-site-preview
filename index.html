@@ -919,6 +919,10 @@
       padding-top: 24px;
     }
 
+    .menu-preview[hidden] {
+      display: none;
+    }
+
     .menu-preview-head {
       display: grid;
       gap: 8px;
@@ -1571,12 +1575,12 @@
         <div class="menu-category dark">
           <h3>Menu officiel</h3>
           <p>Le lien ouvre la carte CAVA en ligne, avec les produits et prix à jour.</p>
-          <div class="menu-row is-active" data-menu-row="panozzi">
+          <div class="menu-row" data-menu-row="panozzi">
             <div>
               <h4>Panozzi</h4>
               <p>Panozzi gourmands, recettes chaudes, format généreux.</p>
             </div>
-            <button class="menu-toggle" type="button" data-menu-target="panozzi" aria-expanded="true">Voir</button>
+            <button class="menu-toggle" type="button" data-menu-target="panozzi" aria-expanded="false">Voir</button>
           </div>
           <div class="menu-row" data-menu-row="pizza">
             <div>
@@ -1592,7 +1596,7 @@
             </div>
             <button class="menu-toggle" type="button" data-menu-target="dolci" aria-expanded="false">Voir</button>
           </div>
-          <div class="menu-preview" id="menu-preview" aria-live="polite"></div>
+          <div class="menu-preview" id="menu-preview" aria-live="polite" hidden></div>
         </div>
       </div>
     </section>
@@ -1726,14 +1730,34 @@
     const menuPreview = document.getElementById("menu-preview");
     const menuToggles = document.querySelectorAll("[data-menu-target]");
     const menuRows = document.querySelectorAll("[data-menu-row]");
+    let activeMenuCategory = null;
+
+    function closeMenuCategory() {
+      activeMenuCategory = null;
+      menuRows.forEach((row) => row.classList.remove("is-active"));
+      menuToggles.forEach((button) => {
+        button.setAttribute("aria-expanded", "false");
+        button.textContent = "Voir";
+      });
+
+      if (!menuPreview) return;
+      menuPreview.innerHTML = "";
+      menuPreview.hidden = true;
+    }
 
     function renderMenuCategory(category) {
       const data = menuCategoryData[category] || menuCategoryData.panozzi;
+      activeMenuCategory = category;
       menuRows.forEach((row) => row.classList.toggle("is-active", row.dataset.menuRow === category));
-      menuToggles.forEach((button) => button.setAttribute("aria-expanded", String(button.dataset.menuTarget === category)));
+      menuToggles.forEach((button) => {
+        const isActive = button.dataset.menuTarget === category;
+        button.setAttribute("aria-expanded", String(isActive));
+        button.textContent = isActive ? "Fermer" : "Voir";
+      });
 
       if (!menuPreview) return;
 
+      menuPreview.hidden = false;
       menuPreview.innerHTML = `
         <div class="menu-preview-head">
           <strong>${data.title}</strong>
@@ -1752,10 +1776,16 @@
     }
 
     menuToggles.forEach((button) => {
-      button.addEventListener("click", () => renderMenuCategory(button.dataset.menuTarget));
-    });
+      button.addEventListener("click", () => {
+        const targetCategory = button.dataset.menuTarget;
+        if (activeMenuCategory === targetCategory) {
+          closeMenuCategory();
+          return;
+        }
 
-    renderMenuCategory("panozzi");
+        renderMenuCategory(targetCategory);
+      });
+    });
 
     const reviewUrl = "/cava-site-preview/data/latest-google-review.json?v=" + Date.now();
     fetch(reviewUrl)
