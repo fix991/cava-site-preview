@@ -606,6 +606,62 @@
       line-height: 1.65;
     }
 
+    .quality-proof {
+      border-top: 1px solid var(--line);
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-top: 4px;
+      padding-top: clamp(22px, 3vw, 34px);
+    }
+
+    .quality-card {
+      align-content: space-between;
+      background: var(--paper);
+      border: 1px solid rgba(31, 91, 58, 0.18);
+      display: grid;
+      min-height: 136px;
+      padding: 16px;
+      transition: border-color 220ms ease, transform 260ms cubic-bezier(.2,.8,.2,1);
+    }
+
+    .quality-card:hover {
+      border-color: rgba(31, 91, 58, 0.42);
+      transform: translateY(-3px);
+    }
+
+    .quality-card img {
+      height: 54px;
+      max-width: 92px;
+      object-fit: contain;
+      width: auto;
+    }
+
+    .quality-card:nth-child(2) img,
+    .quality-card:nth-child(3) img {
+      height: 58px;
+    }
+
+    .quality-card span {
+      color: var(--ink);
+      display: block;
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+      line-height: 1.35;
+      margin-top: 18px;
+      text-transform: uppercase;
+    }
+
+    .quality-note {
+      color: rgba(23, 20, 15, 0.46);
+      font-size: 11px;
+      font-weight: 750;
+      letter-spacing: 0.05em;
+      margin-top: 14px;
+      text-transform: uppercase;
+    }
+
     .atelier-grid {
       display: grid;
       gap: 22px;
@@ -917,6 +973,10 @@
       gap: 18px;
       margin-top: 8px;
       padding-top: 24px;
+    }
+
+    .menu-preview[hidden] {
+      display: none;
     }
 
     .menu-preview-head {
@@ -1239,6 +1299,10 @@
         grid-template-columns: 1fr;
       }
 
+      .quality-proof {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
       .menu-preview-grid {
         grid-template-columns: 1fr;
       }
@@ -1269,6 +1333,11 @@
       .pizza-card,
       .gallery-card {
         padding: 26px 20px;
+      }
+
+      .quality-card {
+        min-height: 118px;
+        padding: 14px;
       }
 
       .ticker {
@@ -1471,6 +1540,25 @@
             <strong>Maison</strong>
             <span>Crèmes, pesto, houmous et compositions sont préparés pour rester lisibles: peu de bruit, beaucoup de goût.</span>
           </div>
+          <div class="quality-proof" aria-label="Repères qualité">
+            <article class="quality-card">
+              <img src="/cava-site-preview/assets/logo-parma.png?v=quality-20260720" alt="Prosciutto di Parma">
+              <span>Jambon cru italien</span>
+            </article>
+            <article class="quality-card">
+              <img src="/cava-site-preview/assets/logo-aop.png?v=quality-20260720" alt="Appellation d'origine protégée">
+              <span>Fromages AOP</span>
+            </article>
+            <article class="quality-card">
+              <img src="/cava-site-preview/assets/logo-igp.png?v=quality-20260720" alt="Indication géographique protégée">
+              <span>Recettes concernées</span>
+            </article>
+            <article class="quality-card">
+              <img src="/cava-site-preview/assets/logo-bio-ue.jpg?v=quality-20260720" alt="Agriculture biologique UE">
+              <span>Légumes locaux & bio</span>
+            </article>
+          </div>
+          <p class="quality-note">Repères utilisés sur les recettes concernées, selon arrivages.</p>
         </div>
       </div>
     </section>
@@ -1571,12 +1659,12 @@
         <div class="menu-category dark">
           <h3>Menu officiel</h3>
           <p>Le lien ouvre la carte CAVA en ligne, avec les produits et prix à jour.</p>
-          <div class="menu-row is-active" data-menu-row="panozzi">
+          <div class="menu-row" data-menu-row="panozzi">
             <div>
               <h4>Panozzi</h4>
               <p>Panozzi gourmands, recettes chaudes, format généreux.</p>
             </div>
-            <button class="menu-toggle" type="button" data-menu-target="panozzi" aria-expanded="true">Voir</button>
+            <button class="menu-toggle" type="button" data-menu-target="panozzi" aria-expanded="false">Voir</button>
           </div>
           <div class="menu-row" data-menu-row="pizza">
             <div>
@@ -1592,7 +1680,7 @@
             </div>
             <button class="menu-toggle" type="button" data-menu-target="dolci" aria-expanded="false">Voir</button>
           </div>
-          <div class="menu-preview" id="menu-preview" aria-live="polite"></div>
+          <div class="menu-preview" id="menu-preview" aria-live="polite" hidden></div>
         </div>
       </div>
     </section>
@@ -1695,12 +1783,20 @@
         title: "Pizze du soir",
         note: "Pizze entières préparées minute, selon la carte sur place du soir.",
         items: [
-          ["Margherita", "Tomate, mozzarella, basilic, huile d'olive.", "11.50€"],
-          ["Francesca", "Base tomate, mozzarella, champignons et jambon cuit.", "12.50€"],
-          ["Natalia", "Une pizza généreuse autour des légumes, fromage et herbes.", "13.50€"],
-          ["Paola", "Recette maison du soir, gourmande et bien italienne.", "14€"],
-          ["Pina", "Crème de truffe, garniture généreuse, format entier.", "17.50€"],
-          ["Sofia", "Pizza entière du soir, selon la carte CAVA.", "15€"],
+          ["Margherita", "Sauce tomate, mozzarella fior di latte, basilic.", "11.50€"],
+          ["Francesca", "Jambon cuit, champignons, sauce tomate, mozzarella fior di latte, basilic.", "12.50€"],
+          ["Manuela", "Fior di latte, ricotta, gorgonzola, pecorino, parmigiano, huile d'olive, basilic.", "14.50€"],
+          ["Rebecca", "Sauce de tomates jaunes, fior di latte, courgettes, stracciatella, pignons, tomates cerises rôties, basilic.", "14€"],
+          ["Pina", "Crème de truffe, burrata, mozzarella fior di latte, jambon cru, basilic.", "17.50€"],
+          ["Alessandra", "Fior di latte, sauce tomate, coppa, stracciatella, pecorino, basilic.", "13€"],
+          ["Natalia", "Tomates cerises rôties, jambon cru, stracciatella, pesto de basilic, copeaux de parmesan.", "13.50€"],
+          ["Rachele", "Calzone avec ricotta, pecorino, salami napolitain, jambon blanc, poivre, basilic.", "13€"],
+          ["Federica", "Pesto de pistache, mortadelle, stracciatella, éclats de pistache, basilic.", "14€"],
+          ["Raffaella", "Sauce tomates jaunes, fior di latte, jambon cru, stracciatella, noisettes du Piémont, confiture de figues.", "15.50€"],
+          ["Sofia", "Fior di latte, sauce tomate jaune, stracciatella, bresaola, granola et pesto de pistache.", "15€"],
+          ["Carlotta", "Sauce tomate, fior di latte, spianata piccante, oignons rouges, basilic.", "14€"],
+          ["Aurora", "Sauce tomate, fior di latte, jambon cuit au four, roquette, basilic.", "14.50€"],
+          ["Paola", "Fior di latte, roquette, tomates cerises, jambon de Parme, copeaux de parmesan.", "14€"],
         ],
       },
       dolci: {
@@ -1718,14 +1814,34 @@
     const menuPreview = document.getElementById("menu-preview");
     const menuToggles = document.querySelectorAll("[data-menu-target]");
     const menuRows = document.querySelectorAll("[data-menu-row]");
+    let activeMenuCategory = null;
+
+    function closeMenuCategory() {
+      activeMenuCategory = null;
+      menuRows.forEach((row) => row.classList.remove("is-active"));
+      menuToggles.forEach((button) => {
+        button.setAttribute("aria-expanded", "false");
+        button.textContent = "Voir";
+      });
+
+      if (!menuPreview) return;
+      menuPreview.innerHTML = "";
+      menuPreview.hidden = true;
+    }
 
     function renderMenuCategory(category) {
       const data = menuCategoryData[category] || menuCategoryData.panozzi;
+      activeMenuCategory = category;
       menuRows.forEach((row) => row.classList.toggle("is-active", row.dataset.menuRow === category));
-      menuToggles.forEach((button) => button.setAttribute("aria-expanded", String(button.dataset.menuTarget === category)));
+      menuToggles.forEach((button) => {
+        const isActive = button.dataset.menuTarget === category;
+        button.setAttribute("aria-expanded", String(isActive));
+        button.textContent = "Voir";
+      });
 
       if (!menuPreview) return;
 
+      menuPreview.hidden = false;
       menuPreview.innerHTML = `
         <div class="menu-preview-head">
           <strong>${data.title}</strong>
@@ -1744,10 +1860,16 @@
     }
 
     menuToggles.forEach((button) => {
-      button.addEventListener("click", () => renderMenuCategory(button.dataset.menuTarget));
-    });
+      button.addEventListener("click", () => {
+        const targetCategory = button.dataset.menuTarget;
+        if (activeMenuCategory === targetCategory) {
+          closeMenuCategory();
+          return;
+        }
 
-    renderMenuCategory("panozzi");
+        renderMenuCategory(targetCategory);
+      });
+    });
 
     const reviewUrl = "/cava-site-preview/data/latest-google-review.json?v=" + Date.now();
     fetch(reviewUrl)
