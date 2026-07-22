@@ -1,0 +1,21 @@
+{
+  "source": "Google Business Profile",
+  "updated_at": "2026-07-22T14:55:41Z",
+  "count": 2,
+  "reviews": [
+    {
+      "review_id": "AbFvOqnRnwDFH4E6yaUwxkk83dmFlHk0_tosLfwQfFivN80GchRzeiGdPVF_z_u_mjo4RNrn0Y4V",
+      "author": "Samuele Grimaldi",
+      "rating": 5,
+      "date": "2026-07-20T10:04:04.043187Z",
+      "text": "Il locale è molto accogliente col personale molto gentile e disponibile nel soddisfare le tue richieste. Il cibo è molto buono con dei prodotti di altissima qualità. Consiglio se si vuole provare del vero street food italiano!!"
+    },
+    {
+      "review_id": "AbFvOqkt4S6I_4PpNhtHKL2sYTHGdkSxY0cu3aEk1c8HhdWraZTHcxJXQkg6IwG30ERQNLSmSPqyWA",
+      "author": "Charles Bord",
+      "rating": 5,
+      "date": "2026-07-19T18:07:40.644136Z",
+      "text": "Deliciosooo !! Personnel adorables et chouette ambiance 🤌🏼🤌🏼"
+    }
+  ]
+}

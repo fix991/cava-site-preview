@@ -1096,9 +1096,9 @@
 
     .review-board h2 {
       color: var(--gold);
-      font-size: clamp(42px, 4.6vw, 68px);
+      font-size: clamp(38px, 3.9vw, 58px);
       line-height: 0.95;
-      max-width: 7ch;
+      max-width: 9ch;
     }
 
     .review-label {
@@ -1125,6 +1125,63 @@
       font-size: 18px;
       letter-spacing: 0.12em;
       min-height: 25px;
+    }
+
+    .review-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .review-quote {
+      border-top: 1px solid rgba(255,255,255,0.18);
+      display: grid;
+      gap: 10px;
+      padding-top: 16px;
+    }
+
+    .review-quote:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .review-quote .stars {
+      font-size: 15px;
+      min-height: auto;
+    }
+
+    .review-quote p {
+      color: rgba(255,255,255,0.8);
+      font-size: 14px;
+      font-weight: 650;
+      line-height: 1.62;
+    }
+
+    .review-foot {
+      align-items: baseline;
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+    }
+
+    .review-foot strong,
+    .review-foot span {
+      display: block;
+      font-family: "Inter", sans-serif;
+    }
+
+    .review-foot strong {
+      color: #fff;
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .review-foot span {
+      color: rgba(255,255,255,0.58);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     .review-text {
@@ -1694,24 +1751,20 @@
             <div>
               <div class="review-label">
                 <div class="kicker">Avis Google</div>
-                <span class="google-chip">Live</span>
+                <span class="google-chip">5 étoiles</span>
               </div>
-              <h2>Ce qu'ils disent de CAVA</h2>
-              <div class="stars" id="review-stars" aria-label="Note Google">★★★★★</div>
-              <p class="review-text" id="review-text">
-                Panozzi chauds, pizza généreuse, service direct. Ici, le dernier avis Google prendra la parole automatiquement.
-              </p>
-              <p class="review-note" id="review-note">Connecté au flux Google Reviews</p>
-            </div>
-            <div class="review-meta">
-              <div>
-                <strong id="review-author">Clients CAVA</strong>
-                <span id="review-date">Mise à jour auto</span>
+              <h2>Derniers avis 5 étoiles.</h2>
+              <div class="review-list" id="review-list">
+                <article class="review-quote">
+                  <div class="stars" aria-label="Note Google">★★★★★</div>
+                  <p>Panozzi chauds, pizza généreuse, service direct. Les derniers avis Google 5 étoiles prendront ici la parole automatiquement.</p>
+                  <div class="review-foot">
+                    <strong>Clients CAVA</strong>
+                    <span>Check en cours</span>
+                  </div>
+                </article>
               </div>
-              <div>
-                <strong id="review-rating">5.0</strong>
-                <span>Source</span>
-              </div>
+              <p class="review-note" id="review-note">Check automatique des derniers avis Google 5 étoiles</p>
             </div>
           </div>
         </article>
@@ -1871,23 +1924,57 @@
       });
     });
 
-    const reviewUrl = "/cava-site-preview/data/latest-google-review.json?v=" + Date.now();
+    const reviewUrl = "/cava-site-preview/data/latest-google-reviews.json?v=" + Date.now();
+    const reviewList = document.getElementById("review-list");
+    const reviewNote = document.getElementById("review-note");
+
+    function escapeHTML(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function reviewStars(rating) {
+      const roundedRating = Math.max(0, Math.min(5, Math.round(Number(rating || 0))));
+      return roundedRating > 0 ? "★".repeat(roundedRating) + "☆".repeat(5 - roundedRating) : "★★★★★";
+    }
+
+    function formatReviewDate(value) {
+      if (!value) return "Dernier avis";
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return value;
+      return new Intl.DateTimeFormat("fr-FR", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+      }).format(date);
+    }
+
     fetch(reviewUrl)
       .then((response) => response.ok ? response.json() : null)
-      .then((review) => {
-        if (!review || !review.text) {
+      .then((payload) => {
+        const reviews = Array.isArray(payload && payload.reviews) ? payload.reviews.slice(0, 2) : [];
+        if (!reviews.length || !reviewList) {
           return;
         }
 
-        const rating = Number(review.rating || 0);
-        const roundedRating = Math.max(0, Math.min(5, Math.round(rating)));
-        const stars = roundedRating > 0 ? "★".repeat(roundedRating) + "☆".repeat(5 - roundedRating) : "★★★★★";
+        reviewList.innerHTML = reviews.map((review) => `
+          <article class="review-quote">
+            <div class="stars" aria-label="Note Google ${Number(review.rating || 5)} sur 5">${reviewStars(review.rating)}</div>
+            <p>${escapeHTML(review.text)}</p>
+            <div class="review-foot">
+              <strong>${escapeHTML(review.author || "Client Google")}</strong>
+              <span>${escapeHTML(formatReviewDate(review.date))}</span>
+            </div>
+          </article>
+        `).join("");
 
-        document.getElementById("review-stars").textContent = stars;
-        document.getElementById("review-text").textContent = review.text;
-        document.getElementById("review-author").textContent = review.author || "Client Google";
-        document.getElementById("review-date").textContent = review.date || "Dernier avis";
-        document.getElementById("review-rating").textContent = rating > 0 ? rating.toFixed(1) : "Google";
+        if (reviewNote && payload.updated_at) {
+          reviewNote.textContent = `Dernier check Google: ${formatReviewDate(payload.updated_at)}`;
+        }
       })
       .catch(() => {});
   </script>
