@@ -1281,7 +1281,7 @@
       color: rgba(255,255,255,0.66);
     }
 
-    .recruitment-roles {
+    .recruitment-details {
       align-content: center;
       background: var(--paper);
       color: var(--ink);
@@ -1289,61 +1289,63 @@
       padding: clamp(32px, 4.5vw, 62px);
     }
 
-    .recruitment-roles > p {
-      color: var(--soft);
-      font-size: 15px;
-      font-weight: 650;
-      line-height: 1.65;
-      margin-bottom: 14px;
-    }
-
-    .role-opening {
-      border-top: 1px solid var(--line);
-      display: grid;
-      gap: 24px;
-      grid-template-columns: minmax(0, 1fr) auto;
-      padding: 28px 0;
-    }
-
-    .role-opening h3 {
+    .recruitment-details h3 {
       color: var(--green);
-      font-size: clamp(36px, 4vw, 54px);
+      font-size: clamp(58px, 6vw, 88px);
       line-height: 0.95;
+      max-width: 7ch;
     }
 
-    .role-opening p {
+    .recruitment-details > p {
+      color: var(--soft);
+      font-size: 16px;
+      font-weight: 650;
+      line-height: 1.7;
+      margin-top: 20px;
+      max-width: 610px;
+    }
+
+    .recruitment-values {
+      border-top: 1px solid var(--line);
+      margin-top: 32px;
+    }
+
+    .recruitment-value {
+      border-bottom: 1px solid var(--line);
+      display: grid;
+      gap: 22px;
+      grid-template-columns: minmax(140px, 0.38fr) minmax(0, 1fr);
+      padding: 19px 0;
+    }
+
+    .recruitment-value span {
       color: var(--soft);
       font-size: 14px;
       font-weight: 650;
       line-height: 1.6;
-      margin-top: 12px;
-      max-width: 540px;
     }
 
-    .role-opening strong {
+    .recruitment-value strong {
       color: var(--tomato);
       display: block;
-      font-size: 11px;
-      font-weight: 850;
-      letter-spacing: 0.1em;
-      margin-bottom: 9px;
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 25px;
+      font-weight: 400;
+      line-height: 1;
       text-transform: uppercase;
     }
 
-    .role-opening time {
+    .recruitment-contact > p {
       color: var(--soft);
-      display: block;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      text-align: right;
-      text-transform: uppercase;
-      white-space: nowrap;
+      font-size: 13px;
+      font-weight: 650;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      max-width: 570px;
     }
 
     .recruitment-contact {
-      border-top: 1px solid var(--line);
-      padding-top: 28px;
+      padding-top: 30px;
     }
 
     .recruitment-contact .actions {
@@ -1522,7 +1524,7 @@
       .pizza-card,
       .gallery-card,
       .recruitment-intro,
-      .recruitment-roles {
+      .recruitment-details {
         padding: 26px 20px;
       }
 
@@ -1572,12 +1574,9 @@
         grid-template-columns: 1fr;
       }
 
-      .role-opening {
+      .recruitment-value {
+        gap: 7px;
         grid-template-columns: 1fr;
-      }
-
-      .role-opening time {
-        text-align: left;
       }
 
       .recruitment-intro {
@@ -1925,38 +1924,44 @@
             <div class="kicker">Recrutement</div>
             <h2 id="recruitment-title">Rejoins l'équipe.</h2>
             <p>
-              On cherche des personnes fiables, souriantes et prêtes à apprendre.
-              L'expérience en restauration est bienvenue, mais l'envie de bien faire
-              et l'esprit d'équipe comptent davantage.
+              Chez CAVA, on aime travailler avec des personnes fiables, souriantes
+              et prêtes à apprendre. L'expérience est bienvenue, mais l'envie de bien
+              faire et l'esprit d'équipe comptent davantage.
             </p>
           </div>
           <div class="recruitment-status">
-            <span>Candidatures ouvertes</span>
+            <span>Candidatures spontanées</span>
             <span>Paris 8e</span>
           </div>
         </div>
-        <div class="recruitment-roles reveal">
-          <div class="kicker">Postes à pourvoir</div>
-          <p>Une petite équipe, des horaires clairs et une formation sur place.</p>
-          <article class="role-opening">
-            <div>
-              <strong>2 postes · 25 h par semaine</strong>
-              <h3>Employé(e) polyvalent(e)</h3>
-              <p>Accueil, service, préparation et tenue du comptoir. Du lundi au vendredi, de 10 h à 15 h.</p>
+        <div class="recruitment-details reveal">
+          <div class="kicker">Candidature spontanée</div>
+          <h3>Fais-nous signe.</h3>
+          <p>
+            CAVA aime découvrir de nouveaux profils, avec ou sans expérience en
+            restauration. Ce qui nous intéresse d'abord, c'est ta façon de travailler.
+          </p>
+          <div class="recruitment-values" aria-label="Ce que nous apprécions">
+            <div class="recruitment-value">
+              <strong>Esprit d'équipe</strong>
+              <span>Aider les autres, communiquer simplement et avancer ensemble.</span>
             </div>
-            <time datetime="2026-08-24">Dès le 24 août</time>
-          </article>
-          <article class="role-opening">
-            <div>
-              <strong>2 places · Convention obligatoire</strong>
-              <h3>Stage conventionné</h3>
-              <p>Accueil client et découverte de la restauration, avec des missions progressives et un tuteur.</p>
+            <div class="recruitment-value">
+              <strong>Sens du service</strong>
+              <span>Aimer le contact et faire en sorte que chaque client soit bien accueilli.</span>
             </div>
-            <time datetime="2026-08-24">Dès le 24 août</time>
-          </article>
+            <div class="recruitment-value">
+              <strong>Envie d'apprendre</strong>
+              <span>Être curieux, fiable et prêt à découvrir nos produits et notre façon de travailler.</span>
+            </div>
+          </div>
           <div class="recruitment-contact">
+            <p>
+              Envoie-nous ton CV et quelques lignes sur toi. Nous te contacterons
+              lorsqu'une opportunité correspondra à ton profil.
+            </p>
             <div class="actions">
-              <a class="button dark" href="mailto:recruiting@cavaitalianstreetfood.com?subject=Candidature%20CAVA">Envoyer mon CV</a>
+              <a class="button dark" href="mailto:recruiting@cavaitalianstreetfood.com?subject=Candidature%20spontan%C3%A9e%20-%20CAVA">Envoyer ma candidature</a>
               <a class="recruitment-email" href="mailto:recruiting@cavaitalianstreetfood.com">recruiting@cavaitalianstreetfood.com</a>
             </div>
           </div>
