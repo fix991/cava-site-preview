@@ -1231,6 +1231,133 @@
       text-transform: uppercase;
     }
 
+    .recruitment {
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .recruitment-grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+    }
+
+    .recruitment-intro {
+      align-content: space-between;
+      background: var(--tomato);
+      display: grid;
+      min-height: 570px;
+      padding: clamp(34px, 5vw, 68px);
+    }
+
+    .recruitment-intro h2 {
+      font-size: clamp(70px, 8vw, 122px);
+      max-width: 5.5ch;
+    }
+
+    .recruitment-intro p {
+      color: rgba(255,255,255,0.82);
+      font-size: 17px;
+      font-weight: 650;
+      line-height: 1.7;
+      margin-top: 26px;
+      max-width: 520px;
+    }
+
+    .recruitment-status {
+      align-items: center;
+      border-top: 1px solid rgba(255,255,255,0.24);
+      display: flex;
+      font-size: 11px;
+      font-weight: 850;
+      justify-content: space-between;
+      letter-spacing: 0.12em;
+      margin-top: 46px;
+      padding-top: 18px;
+      text-transform: uppercase;
+    }
+
+    .recruitment-status span:last-child {
+      color: rgba(255,255,255,0.66);
+    }
+
+    .recruitment-roles {
+      align-content: center;
+      background: var(--paper);
+      color: var(--ink);
+      display: grid;
+      padding: clamp(32px, 4.5vw, 62px);
+    }
+
+    .recruitment-roles > p {
+      color: var(--soft);
+      font-size: 15px;
+      font-weight: 650;
+      line-height: 1.65;
+      margin-bottom: 14px;
+    }
+
+    .role-opening {
+      border-top: 1px solid var(--line);
+      display: grid;
+      gap: 24px;
+      grid-template-columns: minmax(0, 1fr) auto;
+      padding: 28px 0;
+    }
+
+    .role-opening h3 {
+      color: var(--green);
+      font-size: clamp(36px, 4vw, 54px);
+      line-height: 0.95;
+    }
+
+    .role-opening p {
+      color: var(--soft);
+      font-size: 14px;
+      font-weight: 650;
+      line-height: 1.6;
+      margin-top: 12px;
+      max-width: 540px;
+    }
+
+    .role-opening strong {
+      color: var(--tomato);
+      display: block;
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0.1em;
+      margin-bottom: 9px;
+      text-transform: uppercase;
+    }
+
+    .role-opening time {
+      color: var(--soft);
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-align: right;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .recruitment-contact {
+      border-top: 1px solid var(--line);
+      padding-top: 28px;
+    }
+
+    .recruitment-contact .actions {
+      align-items: center;
+      margin-top: 0;
+    }
+
+    .recruitment-email {
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
     .visit {
       background: var(--tomato);
       color: #fff;
@@ -1310,6 +1437,7 @@
       .drinks-grid,
       .gallery-grid,
       .menu-shell,
+      .recruitment-grid,
       .visit-grid,
       .section-head {
         grid-template-columns: 1fr;
@@ -1346,6 +1474,10 @@
       .menu-intro {
         min-height: auto;
         position: static;
+      }
+
+      .recruitment-intro {
+        min-height: 440px;
       }
 
       .sourcing-statement {
@@ -1388,7 +1520,9 @@
       .sourcing-list,
       .atelier-copy,
       .pizza-card,
-      .gallery-card {
+      .gallery-card,
+      .recruitment-intro,
+      .recruitment-roles {
         padding: 26px 20px;
       }
 
@@ -1438,6 +1572,18 @@
         grid-template-columns: 1fr;
       }
 
+      .role-opening {
+        grid-template-columns: 1fr;
+      }
+
+      .role-opening time {
+        text-align: left;
+      }
+
+      .recruitment-intro {
+        min-height: 390px;
+      }
+
       .drinks-copy {
         order: -1;
       }
@@ -1469,6 +1615,7 @@
       <img src="/cava-site-preview/assets/logo-cava.png?v=visible-20260704" alt="CAVA Italian Street Food">
     </a>
     <ul>
+      <li><a href="#recrutement">Recrutement</a></li>
       <li><a href="https://www.instagram.com/cavaitalianstreetfood" target="_blank" rel="noreferrer">Instagram</a></li>
       <li><a class="order-pill" href="https://mylightspeed.app/GZRCHQJG/C-ordering/menu" target="_blank" rel="noreferrer">Commander</a></li>
     </ul>
@@ -1771,6 +1918,52 @@
       </div>
     </section>
 
+    <section class="recruitment" id="recrutement" aria-labelledby="recruitment-title">
+      <div class="inner recruitment-grid">
+        <div class="recruitment-intro reveal">
+          <div>
+            <div class="kicker">Recrutement</div>
+            <h2 id="recruitment-title">Rejoins l'équipe.</h2>
+            <p>
+              On cherche des personnes fiables, souriantes et prêtes à apprendre.
+              L'expérience en restauration est bienvenue, mais l'envie de bien faire
+              et l'esprit d'équipe comptent davantage.
+            </p>
+          </div>
+          <div class="recruitment-status">
+            <span>Candidatures ouvertes</span>
+            <span>Paris 8e</span>
+          </div>
+        </div>
+        <div class="recruitment-roles reveal">
+          <div class="kicker">Postes à pourvoir</div>
+          <p>Une petite équipe, des horaires clairs et une formation sur place.</p>
+          <article class="role-opening">
+            <div>
+              <strong>2 postes · 25 h par semaine</strong>
+              <h3>Employé(e) polyvalent(e)</h3>
+              <p>Accueil, service, préparation et tenue du comptoir. Du lundi au vendredi, de 10 h à 15 h.</p>
+            </div>
+            <time datetime="2026-08-24">Dès le 24 août</time>
+          </article>
+          <article class="role-opening">
+            <div>
+              <strong>2 places · Convention obligatoire</strong>
+              <h3>Stage conventionné</h3>
+              <p>Accueil client et découverte de la restauration, avec des missions progressives et un tuteur.</p>
+            </div>
+            <time datetime="2026-08-24">Dès le 24 août</time>
+          </article>
+          <div class="recruitment-contact">
+            <div class="actions">
+              <a class="button dark" href="mailto:recruiting@cavaitalianstreetfood.com?subject=Candidature%20CAVA">Envoyer mon CV</a>
+              <a class="recruitment-email" href="mailto:recruiting@cavaitalianstreetfood.com">recruiting@cavaitalianstreetfood.com</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="visit" id="visit">
       <div class="inner visit-grid reveal">
         <div>
@@ -1794,6 +1987,7 @@
     <img src="/cava-site-preview/assets/logo-cava-white.png?v=visible-20260704" alt="CAVA Italian Street Food">
     <p class="right">
       <a href="https://www.instagram.com/cavaitalianstreetfood" target="_blank" rel="noreferrer">@cavaitalianstreetfood</a><br>
+      <a href="#recrutement">Recrutement</a><br>
       Preview site concept - CAVA
     </p>
   </footer>
