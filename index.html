@@ -95,17 +95,22 @@
       letter-spacing: 0.08em;
     }
 
-    .instagram-link {
+    .social-link {
       align-items: center;
       display: inline-flex;
       gap: 8px;
     }
 
-    .instagram-link svg {
+    .social-link svg {
       flex: 0 0 auto;
       height: 18px;
       stroke-width: 2;
       width: 18px;
+    }
+
+    .tiktok-link svg {
+      fill: currentColor;
+      stroke: none;
     }
 
     .nav li a {
@@ -1428,7 +1433,7 @@
       text-align: right;
     }
 
-    footer .instagram-link {
+    footer .social-link {
       margin-bottom: 3px;
     }
 
@@ -1517,7 +1522,7 @@
     }
 
     @media (max-width: 720px) {
-      .nav .instagram-link span {
+      .nav .social-link span {
         display: none;
       }
     }
@@ -1535,7 +1540,7 @@
         display: block !important;
       }
 
-      .nav .instagram-link {
+      .nav .social-link {
         display: inline-flex !important;
       }
 
@@ -1627,6 +1632,12 @@
         text-align: center;
       }
     }
+
+    @media (max-width: 360px) {
+      .bottle-stage figure {
+        min-height: 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1643,13 +1654,21 @@
     <ul>
       <li><a href="#recrutement">Recrutement</a></li>
       <li>
-        <a class="instagram-link" href="https://www.instagram.com/cavaitalianstreetfood" target="_blank" rel="noreferrer" aria-label="Instagram CAVA">
+        <a class="social-link instagram-link" href="https://www.instagram.com/cavaitalianstreetfood" target="_blank" rel="noreferrer" aria-label="Instagram CAVA">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
             <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
             <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
             <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
           </svg>
           <span>Instagram</span>
+        </a>
+      </li>
+      <li>
+        <a class="social-link tiktok-link" href="https://www.tiktok.com/@cavaitalianstreetfood" target="_blank" rel="noreferrer" aria-label="TikTok CAVA">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V8.98a6.37 6.37 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.27 6.34 6.34 0 0 0 10.86 4.46V13a8.28 8.28 0 0 0 5.58 2.17V11.7a4.85 4.85 0 0 1-3.77-1.82V6.69h3.77z"></path>
+          </svg>
+          <span>TikTok</span>
         </a>
       </li>
       <li><a class="order-pill" href="https://mylightspeed.app/GZRCHQJG/C-ordering/menu" target="_blank" rel="noreferrer">Commander</a></li>
@@ -2027,11 +2046,17 @@
     <p>47 Rue d'Amsterdam<br>75008 Paris</p>
     <img src="/cava-site-preview/assets/logo-cava-white.png?v=visible-20260704" alt="CAVA Italian Street Food">
     <p class="right">
-      <a class="instagram-link" href="https://www.instagram.com/cavaitalianstreetfood" target="_blank" rel="noreferrer" aria-label="Instagram CAVA">
+      <a class="social-link instagram-link" href="https://www.instagram.com/cavaitalianstreetfood" target="_blank" rel="noreferrer" aria-label="Instagram CAVA">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
           <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
           <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
           <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+        </svg>
+        <span>@cavaitalianstreetfood</span>
+      </a><br>
+      <a class="social-link tiktok-link" href="https://www.tiktok.com/@cavaitalianstreetfood" target="_blank" rel="noreferrer" aria-label="TikTok CAVA">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V8.98a6.37 6.37 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.27 6.34 6.34 0 0 0 10.86 4.46V13a8.28 8.28 0 0 0 5.58 2.17V11.7a4.85 4.85 0 0 1-3.77-1.82V6.69h3.77z"></path>
         </svg>
         <span>@cavaitalianstreetfood</span>
       </a><br>
