@@ -617,29 +617,103 @@
       display: none;
     }
 
-    .guide-visual img {
+    .food-motion {
       position: relative;
       z-index: 1;
+      width: min(100%, 520px);
+      aspect-ratio: 1026 / 1800;
+      isolation: isolate;
+    }
+
+    .food-motion--pasta {
+      width: min(94%, 560px);
+      aspect-ratio: 1122 / 1402;
+    }
+
+    .food-motion--salade {
+      width: min(96%, 500px);
+      aspect-ratio: 1005 / 1900;
+    }
+
+    .food-motion__layer {
+      position: absolute;
+      inset: 0;
+      z-index: var(--layer-z, 1);
       width: 100%;
       height: 100%;
-      object-fit: contain;
-      transform: translateY(36px) scale(0.94);
-      filter: drop-shadow(0 24px 32px rgba(0, 0, 0, 0.18));
-      will-change: transform;
+      object-fit: fill;
+      clip-path: inset(
+        var(--clip-top, 0%)
+        var(--clip-right, 0%)
+        var(--clip-bottom, 0%)
+        var(--clip-left, 0%)
+      );
+      pointer-events: none;
+      transform-origin: var(--origin-x, 50%) var(--origin-y, 50%);
+      will-change: opacity, transform;
     }
 
-    .panozzo-guide .guide-visual img {
-      filter: none;
+    .food-motion__final {
+      position: absolute;
+      inset: 0;
+      z-index: 20;
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 260ms ease;
     }
 
-    .pasta-guide .guide-visual img {
-      width: 92%;
-      height: 84%;
+    .food-motion.is-settled .food-motion__final {
+      opacity: 1;
     }
 
-    .salade-guide .guide-visual img {
-      width: 94%;
-      height: 96%;
+    .food-motion.motion-ready .food-motion__layer {
+      opacity: 0;
+      transform:
+        translate3d(var(--from-x, 0), var(--from-y, -120px), 0)
+        rotate(var(--from-rotate, 0deg))
+        scale(var(--from-scale, 0.94));
+    }
+
+    .food-motion.motion-ready.is-active .food-motion__layer {
+      animation: food-layer-arrive var(--duration, 1050ms) cubic-bezier(0.22, 1, 0.36, 1) var(--delay, 0ms) both;
+    }
+
+    .food-motion--pasta.is-settled .food-motion__layer[data-floating] {
+      opacity: 1;
+      animation: pasta-float var(--float-duration, 2800ms) ease-in-out var(--float-delay, 0ms) infinite alternate;
+    }
+
+    @keyframes food-layer-arrive {
+      0% {
+        opacity: 0;
+        transform:
+          translate3d(var(--from-x, 0), var(--from-y, -120px), 0)
+          rotate(var(--from-rotate, 0deg))
+          scale(var(--from-scale, 0.94));
+      }
+      24% {
+        opacity: 1;
+      }
+      68% {
+        opacity: 1;
+        transform: translate3d(0, 7px, 0) rotate(0deg) scale(1.012);
+      }
+      84% {
+        opacity: 1;
+        transform: translate3d(0, -3px, 0) rotate(0deg) scale(0.996);
+      }
+      100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+      }
+    }
+
+    @keyframes pasta-float {
+      from { transform: translate3d(0, -2px, 0) rotate(-0.8deg); }
+      to { transform: translate3d(0, 5px, 0) rotate(0.8deg); }
     }
 
     .guide-mode {
@@ -1589,9 +1663,9 @@
         height: 76svh;
       }
 
-      .pasta-guide .guide-visual img {
-        width: 100%;
-        height: 92%;
+      .pasta-guide .guide-visual {
+        min-height: 520px;
+        height: 64svh;
       }
 
       .salade-guide .guide-visual {
@@ -1599,9 +1673,9 @@
         height: 88svh;
       }
 
-      .salade-guide .guide-visual img {
+      .food-motion--pasta,
+      .food-motion--salade {
         width: 100%;
-        height: 100%;
       }
 
       .guide-mode {
@@ -1847,6 +1921,15 @@
         transition-duration: 0.01ms !important;
       }
 
+      .food-motion__layer {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+
+      .food-motion__final {
+        display: none;
+      }
+
       .assembly {
         height: 100svh;
         min-height: 720px;
@@ -1965,8 +2048,17 @@
         <p class="guide-body">Fait à la main, comme le veut la tradition. La formule se compose au comptoir, puis le panozzo est servi chaud.</p>
         <span class="guide-tagline">Chaud dehors • moelleux dedans</span>
       </div>
-      <figure class="guide-visual" data-guide-visual>
-        <img src="../assets/panozzo-formule-v8.webp" alt="Panozzo CAVA décomposé avec pain, charcuterie, fromage, crème et légumes" loading="lazy" decoding="async">
+      <figure class="guide-visual">
+        <div class="food-motion food-motion--panozzo" data-food-motion role="img" aria-label="Panozzo CAVA qui se compose avec pain, charcuterie, fromage, crème et légumes">
+          <img class="food-motion__layer" src="../assets/panozzo-motion-bottom.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="--delay:0ms;--from-y:90px;--from-scale:.92;--layer-z:1">
+          <img class="food-motion__layer" src="../assets/panozzo-motion-charcuterie.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="--delay:110ms;--from-x:-110px;--from-y:36px;--from-rotate:-6deg;--layer-z:2">
+          <img class="food-motion__layer" src="../assets/panozzo-motion-fromage.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="--delay:220ms;--from-x:95px;--from-y:28px;--from-rotate:5deg;--layer-z:3">
+          <img class="food-motion__layer" src="../assets/panozzo-motion-tomates.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="--delay:330ms;--from-x:-88px;--from-y:10px;--from-rotate:-4deg;--layer-z:4">
+          <img class="food-motion__layer" src="../assets/panozzo-motion-legumes.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="--delay:440ms;--from-x:105px;--from-y:-12px;--from-rotate:5deg;--layer-z:5">
+          <img class="food-motion__layer" src="../assets/panozzo-motion-roquette.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="--delay:550ms;--from-x:-82px;--from-y:-34px;--from-rotate:-4deg;--layer-z:6">
+          <img class="food-motion__layer" src="../assets/panozzo-motion-creme.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="--delay:660ms;--from-x:72px;--from-y:-60px;--from-rotate:4deg;--layer-z:7">
+          <img class="food-motion__layer" src="../assets/panozzo-motion-top.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="--delay:770ms;--duration:1200ms;--from-y:-150px;--from-scale:.88;--layer-z:8">
+        </div>
       </figure>
       <div class="guide-mode reveal">
         <h3>La composition</h3>
@@ -1991,8 +2083,15 @@
         <p class="guide-body">Plusieurs sauces au choix. Les recettes changent, avec au moins une sauce végétarienne chaque jour.</p>
         <span class="guide-tagline">Chaude • gourmande • zéro routine</span>
       </div>
-      <figure class="guide-visual" data-guide-visual>
-        <img src="../assets/pasta-carbonara-v6.webp" alt="Bowl CAVA de fusilli carbonara avec pâtes en mouvement" loading="lazy" decoding="async">
+      <figure class="guide-visual">
+        <div class="food-motion food-motion--pasta" data-food-motion role="img" aria-label="Pasta CAVA avec cinq fusilli qui tombent dans le bol">
+          <img class="food-motion__layer" src="../assets/pasta-motion-base.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="--duration:850ms;--from-y:55px;--from-scale:.94;--layer-z:1">
+          <img class="food-motion__layer" data-floating src="../assets/pasta-motion-1.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="--delay:250ms;--from-x:38px;--from-y:-250px;--from-rotate:18deg;--float-delay:-900ms;--layer-z:5">
+          <img class="food-motion__layer" data-floating src="../assets/pasta-motion-2.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="--delay:340ms;--from-x:-50px;--from-y:-230px;--from-rotate:-15deg;--float-delay:-1500ms;--layer-z:4">
+          <img class="food-motion__layer" data-floating src="../assets/pasta-motion-3.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="--delay:430ms;--from-x:-76px;--from-y:-210px;--from-rotate:-20deg;--float-delay:-400ms;--layer-z:3">
+          <img class="food-motion__layer" data-floating src="../assets/pasta-motion-4.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="--delay:520ms;--from-x:14px;--from-y:-270px;--from-rotate:12deg;--float-delay:-1800ms;--layer-z:4">
+          <img class="food-motion__layer" data-floating src="../assets/pasta-motion-5.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="--delay:610ms;--from-x:78px;--from-y:-220px;--from-rotate:22deg;--float-delay:-1100ms;--layer-z:3">
+        </div>
       </figure>
       <div class="guide-mode reveal">
         <h3>Comment ça marche</h3>
@@ -2016,8 +2115,16 @@
         <p class="guide-body">Une base, des produits italiens, des légumes frais et la touche finale que tu choisis. Tout sauf une salade triste.</p>
         <span class="guide-tagline">Fraîche • savoureuse • pas banale</span>
       </div>
-      <figure class="guide-visual" data-guide-visual>
-        <img src="../assets/salade-composee-v17.webp" alt="Salade CAVA décomposée avec base, charcuterie, fromage, crème, légumes et focaccia" loading="lazy" decoding="async">
+      <figure class="guide-visual">
+        <div class="food-motion food-motion--salade" data-food-motion role="img" aria-label="Salade CAVA qui se compose avec base, légumes, charcuterie, fromage, crème et focaccia">
+          <img class="food-motion__layer" src="../assets/salade-composee-v17.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="--clip-top:68%;--delay:0ms;--from-y:70px;--from-scale:.94;--layer-z:1">
+          <img class="food-motion__layer" src="../assets/salade-composee-v17.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="--clip-top:52.5%;--clip-bottom:32%;--delay:80ms;--from-x:-70px;--from-y:20px;--from-rotate:-5deg;--layer-z:2">
+          <img class="food-motion__layer" src="../assets/salade-composee-v17.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="--clip-top:41.5%;--clip-bottom:47.5%;--delay:160ms;--from-x:65px;--from-rotate:5deg;--layer-z:3">
+          <img class="food-motion__layer" src="../assets/salade-composee-v17.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="--clip-top:30%;--clip-bottom:58.5%;--delay:240ms;--from-x:-58px;--from-y:-18px;--from-rotate:-4deg;--layer-z:4">
+          <img class="food-motion__layer" src="../assets/salade-composee-v17.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="--clip-top:19%;--clip-bottom:70%;--delay:320ms;--from-x:48px;--from-y:-32px;--from-rotate:4deg;--layer-z:5">
+          <img class="food-motion__layer" src="../assets/salade-composee-v17.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="--clip-bottom:81%;--delay:400ms;--duration:1100ms;--from-y:-90px;--from-scale:.9;--layer-z:6">
+          <img class="food-motion__final" src="../assets/salade-composee-v17.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        </div>
       </figure>
       <div class="guide-mode reveal">
         <h3>La composition</h3>
@@ -2235,7 +2342,8 @@
     const assemblyFinal = document.querySelector(".assembly-final");
     const ingredientLayers = [...document.querySelectorAll(".ingredient-layer")];
     const ingredientLabels = [...document.querySelectorAll(".ingredient-label")];
-    const guideVisuals = [...document.querySelectorAll("[data-guide-visual]")];
+    const foodMotions = [...document.querySelectorAll("[data-food-motion]")];
+    const foodMotionTimers = new WeakMap();
     const scrollCue = document.querySelector(".scroll-cue");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let ticking = false;
@@ -2252,6 +2360,25 @@
       mobileMenu.classList.toggle("is-open", open);
       mobileMenu.setAttribute("aria-hidden", String(!open));
       document.body.classList.toggle("nav-open", open);
+    }
+
+    function resetFoodMotion(motion) {
+      window.clearTimeout(foodMotionTimers.get(motion));
+      motion.classList.remove("is-active", "is-settled");
+    }
+
+    function playFoodMotion(motion) {
+      window.clearTimeout(foodMotionTimers.get(motion));
+      motion.classList.remove("is-active", "is-settled");
+      void motion.offsetWidth;
+      motion.classList.add("is-active");
+
+      const timer = window.setTimeout(() => {
+        if (motion.classList.contains("is-active")) {
+          motion.classList.add("is-settled");
+        }
+      }, 2050);
+      foodMotionTimers.set(motion, timer);
     }
 
     navToggle.addEventListener("click", () => {
@@ -2298,16 +2425,6 @@
           label.style.opacity = String(clamp((assemble - 0.72) * 3.8));
         });
 
-        guideVisuals.forEach((visual, index) => {
-          const section = visual.closest(".product-guide");
-          const guideRect = section.getBoundingClientRect();
-          const guideProgress = clamp((window.innerHeight - guideRect.top) / (window.innerHeight + guideRect.height));
-          const settle = smoothstep(0.08, 0.74, guideProgress);
-          const drift = (0.5 - guideProgress) * 64;
-          const rotation = index === 1 ? (0.5 - guideProgress) * 1.8 : 0;
-          const image = visual.querySelector("img");
-          image.style.transform = `translate3d(0, ${drift}px, 0) scale(${0.94 + settle * 0.06}) rotate(${rotation}deg)`;
-        });
       }
 
       ticking = false;
@@ -2323,6 +2440,23 @@
     window.addEventListener("scroll", requestScrollUpdate, { passive: true });
     window.addEventListener("resize", requestScrollUpdate);
     updateScroll();
+
+    if (!reducedMotion) {
+      const foodMotionObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.intersectionRatio >= 0.48 && !entry.target.classList.contains("is-active")) {
+            playFoodMotion(entry.target);
+          } else if (!entry.isIntersecting) {
+            resetFoodMotion(entry.target);
+          }
+        });
+      }, { threshold: [0, 0.48], rootMargin: "-5% 0px" });
+
+      foodMotions.forEach((motion) => {
+        motion.classList.add("motion-ready");
+        foodMotionObserver.observe(motion);
+      });
+    }
 
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
