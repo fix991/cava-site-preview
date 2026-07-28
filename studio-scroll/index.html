@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f4edda">
-  <meta name="description" content="CAVA Italian Street Food, une exploration digitale du panozzo, de la pizza et des produits italiens à Paris Saint-Lazare.">
+  <meta name="description" content="Découvrez le panozzo, la pasta du jour et la salade sur mesure de CAVA Italian Street Food à Paris Saint-Lazare.">
   <link rel="icon" href="../assets/logo-cava.png" type="image/png">
   <link rel="preload" href="../assets/panozzo-exploded-transparent.png" as="image">
-  <title>CAVA — Panozzo in movimento</title>
+  <title>CAVA — Panozzo, Pasta & Salade</title>
   <style>
     :root {
       --cream: #f4edda;
@@ -53,6 +53,11 @@
     a {
       color: inherit;
       text-decoration: none;
+    }
+
+    section[id],
+    .formula-band {
+      scroll-margin-top: var(--nav-height);
     }
 
     button,
@@ -494,6 +499,245 @@
 
     @keyframes ticker {
       to { transform: translateX(-50%); }
+    }
+
+    .product-guide {
+      position: relative;
+      min-height: 112svh;
+      display: grid;
+      grid-template-columns: minmax(250px, 0.86fr) minmax(360px, 1.12fr) minmax(320px, 0.92fr);
+      align-items: center;
+      gap: 4%;
+      padding: 108px 5.5% 82px;
+      overflow: hidden;
+      color: var(--paper);
+      background: var(--green-deep);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+    }
+
+    .product-guide.pasta-guide {
+      color: var(--ink);
+      background: var(--paper);
+      border-color: var(--ink);
+    }
+
+    .product-guide.salade-guide {
+      background: var(--green);
+    }
+
+    .guide-intro {
+      align-self: start;
+      padding-top: 8svh;
+    }
+
+    .guide-index {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 42px;
+      font-size: 0.72rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .guide-index::before {
+      content: "";
+      width: 34px;
+      height: 2px;
+      background: currentColor;
+    }
+
+    .guide-intro h2 {
+      font-size: 6.2rem;
+    }
+
+    .guide-kicker {
+      margin: 10px 0 26px;
+      font-size: 0.82rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .guide-lede {
+      max-width: 420px;
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 2.1rem;
+      font-weight: 700;
+      line-height: 1.04;
+    }
+
+    .guide-body {
+      max-width: 380px;
+      margin: 28px 0 0;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.92rem;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .pasta-guide .guide-body {
+      color: var(--muted);
+    }
+
+    .guide-tagline {
+      display: inline-block;
+      margin-top: 34px;
+      padding-top: 16px;
+      border-top: 1px solid currentColor;
+      font-size: 0.72rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .guide-visual {
+      position: relative;
+      min-height: 690px;
+      height: 88svh;
+      max-height: 900px;
+      display: grid;
+      place-items: center;
+      margin: 0;
+    }
+
+    .guide-visual::after {
+      content: "";
+      position: absolute;
+      right: 12%;
+      bottom: 6%;
+      left: 12%;
+      height: 16px;
+      background: rgba(0, 0, 0, 0.22);
+      border-radius: 50%;
+      filter: blur(15px);
+      transform: scaleX(0.7);
+    }
+
+    .panozzo-guide .guide-visual::after {
+      display: none;
+    }
+
+    .guide-visual img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transform: translateY(36px) scale(0.94);
+      filter: drop-shadow(0 24px 32px rgba(0, 0, 0, 0.18));
+      will-change: transform;
+    }
+
+    .panozzo-guide .guide-visual img {
+      filter: none;
+    }
+
+    .pasta-guide .guide-visual img {
+      width: 92%;
+      height: 84%;
+    }
+
+    .salade-guide .guide-visual img {
+      width: 94%;
+      height: 96%;
+    }
+
+    .guide-mode {
+      align-self: center;
+    }
+
+    .guide-mode h3 {
+      margin: 0 0 16px;
+      font-family: Impact, "Arial Narrow", sans-serif;
+      font-size: 2.35rem;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .guide-mode-note {
+      max-width: 380px;
+      margin: 0 0 18px;
+      color: rgba(255, 255, 255, 0.66);
+      font-size: 0.82rem;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .pasta-guide .guide-mode-note {
+      color: var(--muted);
+    }
+
+    .guide-steps {
+      border-top: 1px solid currentColor;
+    }
+
+    .guide-step {
+      display: grid;
+      grid-template-columns: 34px minmax(0, 1fr);
+      gap: 14px;
+      padding: 15px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .pasta-guide .guide-step {
+      border-color: var(--line);
+    }
+
+    .guide-step > span {
+      padding-top: 2px;
+      color: var(--yellow);
+      font-size: 0.68rem;
+      font-weight: 900;
+    }
+
+    .pasta-guide .guide-step > span {
+      color: var(--red);
+    }
+
+    .guide-step strong {
+      display: block;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+    }
+
+    .guide-step p {
+      margin: 3px 0 0;
+      color: rgba(255, 255, 255, 0.66);
+      font-size: 0.76rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .pasta-guide .guide-step p {
+      color: var(--muted);
+    }
+
+    .formula-band {
+      min-height: 190px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 40px;
+      padding: 32px 8%;
+      color: var(--green-deep);
+      background: var(--yellow);
+      border-top: 1px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+    }
+
+    .formula-band p {
+      margin: 0;
+      font-family: Impact, "Arial Narrow", sans-serif;
+      font-size: 2.65rem;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .formula-price {
+      font-family: Impact, "Arial Narrow", sans-serif;
+      font-size: 6.8rem;
+      line-height: 0.8;
+      white-space: nowrap;
     }
 
     .product-portrait {
@@ -1148,10 +1392,6 @@
         gap: 16px;
       }
 
-      .nav-links li:nth-child(2) {
-        display: none;
-      }
-
       .assembly-copy h1 {
         font-size: 5.2rem;
       }
@@ -1159,6 +1399,47 @@
       .assembly-product {
         right: -8%;
         width: 72%;
+      }
+
+      .product-guide {
+        min-height: auto;
+        grid-template-columns: minmax(220px, 0.78fr) minmax(360px, 1.22fr);
+        gap: 44px;
+        padding-top: 96px;
+      }
+
+      .guide-intro {
+        padding-top: 42px;
+      }
+
+      .guide-intro h2 {
+        font-size: 5.1rem;
+      }
+
+      .guide-visual {
+        min-height: 720px;
+        height: 78svh;
+      }
+
+      .guide-mode {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.28fr);
+        column-gap: 42px;
+      }
+
+      .guide-mode h3 {
+        grid-column: 1;
+        align-self: end;
+      }
+
+      .guide-mode-note {
+        grid-column: 1;
+      }
+
+      .guide-steps {
+        grid-column: 2;
+        grid-row: 1 / span 2;
       }
 
       .portrait-copy h2,
@@ -1274,6 +1555,78 @@
 
       .ticker-track span::after {
         margin-left: 40px;
+      }
+
+      .product-guide {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        padding: 86px 20px 70px;
+      }
+
+      .guide-intro {
+        padding-top: 0;
+      }
+
+      .guide-index {
+        margin-bottom: 28px;
+      }
+
+      .guide-intro h2 {
+        font-size: 4.25rem;
+      }
+
+      .guide-lede {
+        max-width: 360px;
+        font-size: 1.9rem;
+      }
+
+      .guide-body {
+        margin-top: 20px;
+      }
+
+      .guide-visual {
+        min-height: 620px;
+        height: 76svh;
+      }
+
+      .pasta-guide .guide-visual img {
+        width: 100%;
+        height: 92%;
+      }
+
+      .salade-guide .guide-visual {
+        min-height: 690px;
+        height: 88svh;
+      }
+
+      .salade-guide .guide-visual img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .guide-mode {
+        grid-column: auto;
+        display: block;
+      }
+
+      .guide-mode h3 {
+        font-size: 2.65rem;
+      }
+
+      .formula-band {
+        min-height: 210px;
+        grid-template-columns: 1fr;
+        gap: 18px;
+        padding: 36px 20px;
+      }
+
+      .formula-band p {
+        max-width: 340px;
+        font-size: 2.1rem;
+      }
+
+      .formula-price {
+        font-size: 5.4rem;
       }
 
       .portrait-copy {
@@ -1433,6 +1786,28 @@
         top: 40%;
       }
 
+      .guide-intro h2 {
+        font-size: 3.65rem;
+      }
+
+      .guide-lede {
+        font-size: 1.65rem;
+      }
+
+      .guide-visual {
+        min-height: 540px;
+        height: 70svh;
+      }
+
+      .salade-guide .guide-visual {
+        min-height: 620px;
+        height: 82svh;
+      }
+
+      .formula-price {
+        font-size: 4.7rem;
+      }
+
       .portrait-copy h2,
       .manifesto-words span,
       .pizza-world h2,
@@ -1494,8 +1869,8 @@
     </button>
     <ul class="nav-links">
       <li><a href="#panozzo">Panozzo</a></li>
-      <li><a href="#produits">Produits</a></li>
-      <li><a href="#pizza">Pizza</a></li>
+      <li><a href="#pasta">Pasta</a></li>
+      <li><a href="#salade">Salade</a></li>
     </ul>
     <a class="brand" href="#top" aria-label="CAVA, retour en haut">
       <img src="../assets/logo-cava.png" alt="CAVA Italian Street Food">
@@ -1511,8 +1886,8 @@
   <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
     <ul>
       <li><a href="#panozzo">Panozzo</a></li>
-      <li><a href="#produits">Produits</a></li>
-      <li><a href="#pizza">Pizza</a></li>
+      <li><a href="#pasta">Pasta</a></li>
+      <li><a href="#salade">Salade</a></li>
       <li><a href="#menu">Menu</a></li>
       <li><a href="#avis">Avis</a></li>
       <li><a href="#equipe">Équipe</a></li>
@@ -1571,61 +1946,97 @@
     <div class="ticker" aria-hidden="true">
       <div class="ticker-track">
         <span>Panozzo caldo</span>
-        <span>Pizza du soir</span>
-        <span>Crèmes maison</span>
-        <span>Produits italiens</span>
+        <span>Pasta du jour</span>
+        <span>Salade sur mesure</span>
+        <span>Focaccia incluse</span>
         <span>Panozzo caldo</span>
-        <span>Pizza du soir</span>
-        <span>Crèmes maison</span>
-        <span>Produits italiens</span>
+        <span>Pasta du jour</span>
+        <span>Salade sur mesure</span>
+        <span>Focaccia incluse</span>
       </div>
     </div>
 
-    <section class="product-portrait reveal-target" aria-labelledby="pistacchioso-title">
-      <img src="../assets/panozzo-pistacchioso-20260705.jpg" alt="Le panozzo Pistacchioso de CAVA" loading="lazy" decoding="async">
-      <div class="portrait-copy">
-        <div>
-          <p class="eyebrow">Signature n°01</p>
-          <h2 class="display" id="pistacchioso-title">Pistacchioso.</h2>
-        </div>
-        <div class="portrait-bottom">
-          <p>Pesto de pistache, mortadelle à la truffe, burrata, éclats de pistache et huile d'olive vierge extra.</p>
-          <a class="button light" href="https://mylightspeed.app/GZRCHQJG/C-ordering/menu" target="_blank" rel="noreferrer">Commander</a>
+    <section class="product-guide panozzo-guide" id="panozzo-formule" aria-labelledby="panozzo-guide-title">
+      <div class="guide-intro reveal">
+        <div class="guide-index">01 / Le roi de la maison</div>
+        <h2 class="display" id="panozzo-guide-title">Panozzo</h2>
+        <p class="guide-kicker">Composé sur mesure</p>
+        <p class="guide-lede">Le sandwich italien qui fait oublier le jambon-beurre.</p>
+        <p class="guide-body">Fait à la main, comme le veut la tradition. La formule se compose au comptoir, puis le panozzo est servi chaud.</p>
+        <span class="guide-tagline">Chaud dehors • moelleux dedans</span>
+      </div>
+      <figure class="guide-visual" data-guide-visual>
+        <img src="../assets/panozzo-formule-v8.webp" alt="Panozzo CAVA décomposé avec pain, charcuterie, fromage, crème et légumes" loading="lazy" decoding="async">
+      </figure>
+      <div class="guide-mode reveal">
+        <h3>La composition</h3>
+        <p class="guide-mode-note">Choisis chaque élément de ton panozzo. Nous le composons et le chauffons minute.</p>
+        <div class="guide-steps">
+          <div class="guide-step"><span>01</span><div><strong>1 charcuterie</strong><p>Fine, généreuse et pleine de goût.</p></div></div>
+          <div class="guide-step"><span>02</span><div><strong>1 fromage</strong><p>100% italien AOP, au choix.</p></div></div>
+          <div class="guide-step"><span>03</span><div><strong>1 crème</strong><p>Fraîche, légère et gourmande.</p></div></div>
+          <div class="guide-step"><span>04</span><div><strong>3 légumes</strong><p>Grillés, frais et gourmands.</p></div></div>
+          <div class="guide-step"><span>05</span><div><strong>Huile d'olive</strong><p>Un filet d'huile extra vierge d'olive.</p></div></div>
+          <div class="guide-step"><span>06</span><div><strong>Pain panozzo</strong><p>Croustillant dehors, moelleux dedans. Levé 24h.</p></div></div>
         </div>
       </div>
     </section>
 
-    <section class="manifesto" id="produits" aria-labelledby="origin-title">
-      <div class="manifesto-grid">
-        <div class="manifesto-copy">
-          <div>
-            <p class="eyebrow">Notre façon de faire</p>
-            <div class="manifesto-words display" id="origin-title">
-              <span>Italie.</span>
-              <span>Local.</span>
-              <span>Maison.</span>
-            </div>
-          </div>
-          <div class="manifesto-list">
-            <article>
-              <strong>Produits italiens</strong>
-              <p>Mortadella, Parma, mozzarella di bufala, provolone, gorgonzola et huile d'olive.</p>
-            </article>
-            <article>
-              <strong>Légumes frais</strong>
-              <p>Locaux et bio selon les saisons et les arrivages de nos producteurs.</p>
-            </article>
-            <article>
-              <strong>Préparé chez CAVA</strong>
-              <p>Crèmes, pesto, houmous et compositions sont travaillés au comptoir.</p>
-            </article>
-          </div>
-        </div>
-        <figure class="manifesto-photo reveal-target">
-          <img src="../assets/panozzo-italiano-vero-new.jpg" alt="Panozzo Italiano Vero CAVA" loading="lazy" decoding="async">
-          <figcaption>Italiano Vero / Paris 08</figcaption>
-        </figure>
+    <section class="product-guide pasta-guide" id="pasta" aria-labelledby="pasta-guide-title">
+      <div class="guide-intro reveal">
+        <div class="guide-index">02 / Du jour, à votre sauce</div>
+        <h2 class="display" id="pasta-guide-title">Pasta</h2>
+        <p class="guide-kicker">Chaude et préparée minute</p>
+        <p class="guide-lede">Les pâtes faites par des Italiens, c'est quand même mieux.</p>
+        <p class="guide-body">Plusieurs sauces au choix. Les recettes changent, avec au moins une sauce végétarienne chaque jour.</p>
+        <span class="guide-tagline">Chaude • gourmande • zéro routine</span>
       </div>
+      <figure class="guide-visual" data-guide-visual>
+        <img src="../assets/pasta-carbonara-v6.webp" alt="Bowl CAVA de fusilli carbonara avec pâtes en mouvement" loading="lazy" decoding="async">
+      </figure>
+      <div class="guide-mode reveal">
+        <h3>Comment ça marche</h3>
+        <p class="guide-mode-note">La pasta du jour change de sauce, mais reste toujours généreuse et servie chaude.</p>
+        <div class="guide-steps">
+          <div class="guide-step"><span>01</span><div><strong>Plusieurs sauces</strong><p>Carbonara, cacio e pepe, bolognaise, pesto de pistache, quatre fromages…</p></div></div>
+          <div class="guide-step"><span>02</span><div><strong>À vous de choisir</strong><p>Prenez celle qui vous fait envie.</p></div></div>
+          <div class="guide-step"><span>03</span><div><strong>1 sauce végé minimum</strong><p>Chaque jour. Sans exception.</p></div></div>
+          <div class="guide-step"><span>04</span><div><strong>Sauce généreuse</strong><p>Chez nous, on ne la compte pas.</p></div></div>
+          <div class="guide-step"><span>05</span><div><strong>Focaccia incluse</strong><p>Pour saucer jusqu'à la dernière goutte.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="product-guide salade-guide" id="salade" aria-labelledby="salade-guide-title">
+      <div class="guide-intro reveal">
+        <div class="guide-index">03 / Composée sur mesure</div>
+        <h2 class="display" id="salade-guide-title">Salade</h2>
+        <p class="guide-kicker">Votre salade, à votre façon</p>
+        <p class="guide-lede">Votre salade comme vous l'aimez.</p>
+        <p class="guide-body">Une base, des produits italiens, des légumes frais et la touche finale que tu choisis. Tout sauf une salade triste.</p>
+        <span class="guide-tagline">Fraîche • savoureuse • pas banale</span>
+      </div>
+      <figure class="guide-visual" data-guide-visual>
+        <img src="../assets/salade-composee-v17.webp" alt="Salade CAVA décomposée avec base, charcuterie, fromage, crème, légumes et focaccia" loading="lazy" decoding="async">
+      </figure>
+      <div class="guide-mode reveal">
+        <h3>La composition</h3>
+        <p class="guide-mode-note">Compose ta salade sur mesure en suivant les sept étapes de la formule.</p>
+        <div class="guide-steps">
+          <div class="guide-step"><span>01</span><div><strong>1 base</strong><p>1 base entière ou 2 demi-bases.</p></div></div>
+          <div class="guide-step"><span>02</span><div><strong>1 charcuterie</strong><p>Fine, généreuse et pleine de goût.</p></div></div>
+          <div class="guide-step"><span>03</span><div><strong>1 fromage</strong><p>100% italien AOP, au choix.</p></div></div>
+          <div class="guide-step"><span>04</span><div><strong>1 crème</strong><p>Fraîche, légère et gourmande.</p></div></div>
+          <div class="guide-step"><span>05</span><div><strong>3 légumes</strong><p>Grillés, frais et gourmands.</p></div></div>
+          <div class="guide-step"><span>06</span><div><strong>1 topping</strong><p>Pistaches, noisettes et autres pépites.</p></div></div>
+          <div class="guide-step"><span>07</span><div><strong>Focaccia</strong><p>Toujours incluse, dorée et moelleuse.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="formula-band" aria-label="Prix de la formule">
+      <p>Panozzo, pasta du jour ou salade</p>
+      <strong class="formula-price">11,50 €</strong>
     </section>
 
     <section class="pizza-world" id="pizza" aria-labelledby="pizza-title">
@@ -1824,6 +2235,7 @@
     const assemblyFinal = document.querySelector(".assembly-final");
     const ingredientLayers = [...document.querySelectorAll(".ingredient-layer")];
     const ingredientLabels = [...document.querySelectorAll(".ingredient-label")];
+    const guideVisuals = [...document.querySelectorAll("[data-guide-visual]")];
     const scrollCue = document.querySelector(".scroll-cue");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let ticking = false;
@@ -1884,6 +2296,17 @@
 
         ingredientLabels.forEach((label) => {
           label.style.opacity = String(clamp((assemble - 0.72) * 3.8));
+        });
+
+        guideVisuals.forEach((visual, index) => {
+          const section = visual.closest(".product-guide");
+          const guideRect = section.getBoundingClientRect();
+          const guideProgress = clamp((window.innerHeight - guideRect.top) / (window.innerHeight + guideRect.height));
+          const settle = smoothstep(0.08, 0.74, guideProgress);
+          const drift = (0.5 - guideProgress) * 64;
+          const rotation = index === 1 ? (0.5 - guideProgress) * 1.8 : 0;
+          const image = visual.querySelector("img");
+          image.style.transform = `translate3d(0, ${drift}px, 0) scale(${0.94 + settle * 0.06}) rotate(${rotation}deg)`;
         });
       }
 
