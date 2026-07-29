@@ -6,7 +6,8 @@
   <meta name="theme-color" content="#f4edda">
   <meta name="description" content="Découvrez le panozzo, la pasta du jour et la salade sur mesure de CAVA Italian Street Food à Paris Saint-Lazare.">
   <link rel="icon" href="../assets/logo-cava.png" type="image/png">
-  <link rel="preload" href="../assets/panozzo-exploded-transparent.png" as="image">
+  <link rel="preload" href="../assets/panozzo-motion-bottom.webp" as="image">
+  <link rel="preload" href="../assets/panozzo-motion-top.webp" as="image">
   <title>CAVA — Panozzo, Pasta & Salade</title>
   <style>
     :root {
@@ -355,67 +356,110 @@
       background: var(--ink);
     }
 
-    .assembly-product {
+    .hero-showcase {
       position: absolute;
       z-index: 2;
-      top: 11%;
-      right: -2%;
-      width: min(67%, 980px);
-      aspect-ratio: 1198 / 987;
-      will-change: transform;
+      top: 12%;
+      right: 3%;
+      bottom: 8%;
+      left: 39%;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      align-items: end;
+      gap: clamp(10px, 1.7vw, 30px);
     }
 
-    .ingredient-layer {
-      position: absolute;
-      inset: 0;
-      clip-path: inset(var(--clip-top) 0 var(--clip-bottom) 0);
-      will-change: transform;
+    .hero-product {
+      position: relative;
+      display: grid;
+      grid-template-rows: minmax(0, 1fr) auto;
+      min-width: 0;
+      height: 100%;
+      margin: 0;
+      transform-origin: 50% 72%;
+      will-change: opacity, transform;
     }
 
-    .ingredient-layer img {
+    .hero-food-frame {
+      position: relative;
       width: 100%;
       height: 100%;
+      min-height: 0;
+      transform-origin: 50% 65%;
+    }
+
+    .hero-food-frame::before {
+      content: attr(data-word);
+      position: absolute;
+      z-index: 0;
+      top: 50%;
+      left: 50%;
+      color: var(--ink);
+      opacity: var(--word-opacity, 0);
+      font-family: "Arial Narrow", Arial, Helvetica, sans-serif;
+      font-size: clamp(3.5rem, 6vw, 7.5rem);
+      font-weight: 900;
+      line-height: 0.8;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transform: translate(-50%, -50%) rotate(-90deg);
+      pointer-events: none;
+    }
+
+    .hero-layer {
+      position: absolute;
+      inset: 0;
+      z-index: var(--layer-z, 1);
+      width: 100%;
+      height: 100%;
+      clip-path: inset(var(--clip-top, 0%) 0 var(--clip-bottom, 0%) 0);
       object-fit: contain;
       user-select: none;
       pointer-events: none;
+      will-change: opacity, transform;
     }
 
-    .ingredient-label {
-      position: absolute;
-      z-index: 4;
+    .hero-product figcaption {
       display: flex;
-      align-items: center;
-      gap: 10px;
-      opacity: 0;
-      font-size: 0.68rem;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(20, 18, 14, 0.28);
+      font-family: "Arial Narrow", Arial, Helvetica, sans-serif;
+      font-size: clamp(1rem, 1.5vw, 1.5rem);
       font-weight: 900;
+      line-height: 1;
       text-transform: uppercase;
-      padding: 5px 7px;
-      background: rgba(244, 237, 218, 0.9);
-      transition: opacity 180ms linear;
-      pointer-events: none;
     }
 
-    .ingredient-label::before {
-      content: "";
-      width: 34px;
-      height: 1px;
-      background: currentColor;
+    .hero-product figcaption span {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.64rem;
+      letter-spacing: 0;
     }
 
-    .ingredient-label.one {
-      top: 27%;
-      right: 4%;
+    .hero-product.is-complete .hero-food-frame {
+      animation: hero-food-float 4.8s ease-in-out infinite;
     }
 
-    .ingredient-label.two {
-      top: 48%;
-      left: 1%;
+    .hero-product--pasta.is-complete .hero-food-frame {
+      animation-delay: -1.6s;
     }
 
-    .ingredient-label.three {
-      right: 4%;
-      bottom: 20%;
+    .hero-product--salade.is-complete .hero-food-frame {
+      animation-delay: -3.1s;
+    }
+
+    @keyframes hero-food-float {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-5px);
+      }
     }
 
     .assembly-final {
@@ -1470,9 +1514,10 @@
         font-size: 5.2rem;
       }
 
-      .assembly-product {
-        right: -8%;
-        width: 72%;
+      .hero-showcase {
+        right: 2%;
+        left: 35%;
+        gap: 12px;
       }
 
       .product-guide {
@@ -1589,10 +1634,23 @@
         font-size: 0.88rem;
       }
 
-      .assembly-product {
-        top: 38%;
-        right: -24%;
-        width: 142%;
+      .hero-showcase {
+        top: 45%;
+        right: 18px;
+        bottom: 5%;
+        left: 18px;
+        display: block;
+      }
+
+      .hero-product {
+        position: absolute;
+        inset: 0;
+        width: min(100%, 560px);
+        margin: 0 auto;
+      }
+
+      .hero-product figcaption {
+        font-size: 1.25rem;
       }
 
       .assembly-final {
@@ -1612,13 +1670,9 @@
         font-size: 0.86rem;
       }
 
-      .ingredient-label {
-        display: none;
-      }
-
       .scroll-cue {
-        right: 16px;
-        bottom: 16px;
+        right: 10px;
+        bottom: 62px;
       }
 
       .ticker-track span {
@@ -1856,8 +1910,8 @@
         font-size: 3.55rem;
       }
 
-      .assembly-product {
-        top: 40%;
+      .hero-showcase {
+        top: 46%;
       }
 
       .guide-intro h2 {
@@ -1926,6 +1980,26 @@
         transform: none !important;
       }
 
+      .hero-showcase {
+        display: grid;
+      }
+
+      .hero-product {
+        position: relative;
+        inset: auto;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+
+      .hero-layer {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+
+      .hero-product .hero-food-frame {
+        animation: none !important;
+      }
+
       .food-motion__final {
         display: none;
       }
@@ -1951,7 +2025,7 @@
       <span></span>
     </button>
     <ul class="nav-links">
-      <li><a href="#panozzo">Panozzo</a></li>
+      <li><a href="#panozzo-formule">Panozzo</a></li>
       <li><a href="#pasta">Pasta</a></li>
       <li><a href="#salade">Salade</a></li>
     </ul>
@@ -1968,7 +2042,7 @@
 
   <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
     <ul>
-      <li><a href="#panozzo">Panozzo</a></li>
+      <li><a href="#panozzo-formule">Panozzo</a></li>
       <li><a href="#pasta">Pasta</a></li>
       <li><a href="#salade">Salade</a></li>
       <li><a href="#menu">Menu</a></li>
@@ -1979,47 +2053,60 @@
   </div>
 
   <main id="top">
-    <section class="assembly" id="panozzo" aria-labelledby="hero-title">
+    <section class="assembly" id="formule" aria-labelledby="hero-title">
       <div class="assembly-sticky">
         <div class="edition-index">CAVA / Paris 08</div>
 
         <div class="assembly-copy">
           <p class="eyebrow">Italian street food — Saint-Lazare</p>
-          <h1 class="display" id="hero-title">Le goût prend forme.</h1>
-          <p>Fais défiler. Le panozzo se compose couche après couche, comme au comptoir.</p>
+          <h1 class="display" id="hero-title">Panozzo. Pasta. Salade.</h1>
+          <p>Fais défiler : chaque recette se compose sous tes yeux, exactement comme au comptoir.</p>
         </div>
 
-        <figure class="assembly-product" role="img" aria-label="Un panozzo CAVA décomposé en sept couches">
-          <div class="ingredient-layer" data-shift="0.24" data-x="-0.018" style="--clip-top: 0%; --clip-bottom: 80%;">
-            <img src="../assets/panozzo-exploded-transparent.png" alt="">
-          </div>
-          <div class="ingredient-layer" data-shift="0.14" data-x="0.015" style="--clip-top: 17%; --clip-bottom: 65%;">
-            <img src="../assets/panozzo-exploded-transparent.png" alt="">
-          </div>
-          <div class="ingredient-layer" data-shift="0.08" data-x="-0.012" style="--clip-top: 31%; --clip-bottom: 54%;">
-            <img src="../assets/panozzo-exploded-transparent.png" alt="">
-          </div>
-          <div class="ingredient-layer" data-shift="0.025" data-x="0.018" style="--clip-top: 42%; --clip-bottom: 42%;">
-            <img src="../assets/panozzo-exploded-transparent.png" alt="">
-          </div>
-          <div class="ingredient-layer" data-shift="-0.025" data-x="-0.01" style="--clip-top: 55%; --clip-bottom: 29%;">
-            <img src="../assets/panozzo-exploded-transparent.png" alt="">
-          </div>
-          <div class="ingredient-layer" data-shift="-0.09" data-x="0.012" style="--clip-top: 66%; --clip-bottom: 17%;">
-            <img src="../assets/panozzo-exploded-transparent.png" alt="">
-          </div>
-          <div class="ingredient-layer" data-shift="-0.17" data-x="-0.014" style="--clip-top: 80%; --clip-bottom: 0%;">
-            <img src="../assets/panozzo-exploded-transparent.png" alt="">
-          </div>
-          <span class="ingredient-label one">Stracciatella</span>
-          <span class="ingredient-label two">Légumes locaux</span>
-          <span class="ingredient-label three">Prosciutto italiano</span>
-        </figure>
+        <div class="hero-showcase" aria-label="Panozzo, pasta et salade CAVA en composition">
+          <figure class="hero-product hero-product--panozzo" data-hero-product="panozzo" data-start="0.02" data-stagger="0.025">
+            <div class="hero-food-frame" data-word="Panozzo" role="img" aria-label="Le Panozzo CAVA vertical se compose couche après couche">
+              <img class="hero-layer" src="../assets/panozzo-motion-bottom.webp" alt="" aria-hidden="true" style="--layer-z:1" data-from-y="90" data-from-scale="0.92">
+              <img class="hero-layer" src="../assets/panozzo-motion-charcuterie.webp" alt="" aria-hidden="true" style="--layer-z:2" data-from-x="-110" data-from-y="36" data-from-rotate="-6">
+              <img class="hero-layer" src="../assets/panozzo-motion-fromage.webp" alt="" aria-hidden="true" style="--layer-z:3" data-from-x="95" data-from-y="28" data-from-rotate="5">
+              <img class="hero-layer" src="../assets/panozzo-motion-tomates.webp" alt="" aria-hidden="true" style="--layer-z:4" data-from-x="-88" data-from-y="10" data-from-rotate="-4">
+              <img class="hero-layer" src="../assets/panozzo-motion-legumes.webp" alt="" aria-hidden="true" style="--layer-z:5" data-from-x="105" data-from-y="-12" data-from-rotate="5">
+              <img class="hero-layer" src="../assets/panozzo-motion-roquette.webp" alt="" aria-hidden="true" style="--layer-z:6" data-from-x="-82" data-from-y="-34" data-from-rotate="-4">
+              <img class="hero-layer" src="../assets/panozzo-motion-creme.webp" alt="" aria-hidden="true" style="--layer-z:7" data-from-x="72" data-from-y="-60" data-from-rotate="4">
+              <img class="hero-layer" src="../assets/panozzo-motion-top.webp" alt="" aria-hidden="true" style="--layer-z:8" data-from-y="-150" data-from-scale="0.88">
+            </div>
+            <figcaption><span>01</span>Panozzo</figcaption>
+          </figure>
+
+          <figure class="hero-product hero-product--pasta" data-hero-product="pasta" data-start="0.26" data-stagger="0.04">
+            <div class="hero-food-frame" data-word="Pasta" role="img" aria-label="Les fusilli tombent dans la pasta CAVA">
+              <img class="hero-layer" src="../assets/pasta-motion-base.webp" alt="" aria-hidden="true" style="--layer-z:1" data-from-y="55" data-from-scale="0.94">
+              <img class="hero-layer" src="../assets/pasta-motion-1.webp" alt="" aria-hidden="true" style="--layer-z:5" data-from-x="38" data-from-y="-250" data-from-rotate="18">
+              <img class="hero-layer" src="../assets/pasta-motion-2.webp" alt="" aria-hidden="true" style="--layer-z:4" data-from-x="-50" data-from-y="-230" data-from-rotate="-15">
+              <img class="hero-layer" src="../assets/pasta-motion-3.webp" alt="" aria-hidden="true" style="--layer-z:3" data-from-x="-76" data-from-y="-210" data-from-rotate="-20">
+              <img class="hero-layer" src="../assets/pasta-motion-4.webp" alt="" aria-hidden="true" style="--layer-z:4" data-from-x="14" data-from-y="-270" data-from-rotate="12">
+              <img class="hero-layer" src="../assets/pasta-motion-5.webp" alt="" aria-hidden="true" style="--layer-z:3" data-from-x="78" data-from-y="-220" data-from-rotate="22">
+            </div>
+            <figcaption><span>02</span>Pasta</figcaption>
+          </figure>
+
+          <figure class="hero-product hero-product--salade" data-hero-product="salade" data-start="0.52" data-stagger="0.035">
+            <div class="hero-food-frame" data-word="Salade" role="img" aria-label="La salade CAVA se compose depuis son bol">
+              <img class="hero-layer" src="../assets/salade-composee-v17.webp" alt="" aria-hidden="true" style="--clip-top:68%;--layer-z:1" data-from-y="70" data-from-scale="0.94">
+              <img class="hero-layer" src="../assets/salade-composee-v17.webp" alt="" aria-hidden="true" style="--clip-top:52.5%;--clip-bottom:32%;--layer-z:2" data-from-x="-70" data-from-y="20" data-from-rotate="-5">
+              <img class="hero-layer" src="../assets/salade-composee-v17.webp" alt="" aria-hidden="true" style="--clip-top:41.5%;--clip-bottom:47.5%;--layer-z:3" data-from-x="65" data-from-rotate="5">
+              <img class="hero-layer" src="../assets/salade-composee-v17.webp" alt="" aria-hidden="true" style="--clip-top:30%;--clip-bottom:58.5%;--layer-z:4" data-from-x="-58" data-from-y="-18" data-from-rotate="-4">
+              <img class="hero-layer" src="../assets/salade-composee-v17.webp" alt="" aria-hidden="true" style="--clip-top:19%;--clip-bottom:70%;--layer-z:5" data-from-x="48" data-from-y="-32" data-from-rotate="4">
+              <img class="hero-layer" src="../assets/salade-composee-v17.webp" alt="" aria-hidden="true" style="--clip-bottom:81%;--layer-z:6" data-from-y="-90" data-from-scale="0.9">
+            </div>
+            <figcaption><span>03</span>Salade</figcaption>
+          </figure>
+        </div>
 
         <div class="assembly-final">
-          <p class="eyebrow">Sept couches. Un seul geste.</p>
-          <h2 class="display">Chaud. Net. Généreux.</h2>
-          <p>Un pain croustillant, des produits italiens, des légumes locaux et bio selon les arrivages.</p>
+          <p class="eyebrow">Trois façons de déjeuner CAVA.</p>
+          <h2 class="display">À chacun sa façon.</h2>
+          <p>Panozzo chaud, pasta du jour ou salade sur mesure, avec des produits italiens et des légumes locaux et bio.</p>
         </div>
 
         <div class="scroll-cue" aria-hidden="true">Scroll <span></span></div>
@@ -2338,10 +2425,8 @@
     const progressBar = document.querySelector(".scroll-progress");
     const assembly = document.querySelector(".assembly");
     const assemblyCopy = document.querySelector(".assembly-copy");
-    const assemblyProduct = document.querySelector(".assembly-product");
     const assemblyFinal = document.querySelector(".assembly-final");
-    const ingredientLayers = [...document.querySelectorAll(".ingredient-layer")];
-    const ingredientLabels = [...document.querySelectorAll(".ingredient-label")];
+    const heroProducts = [...document.querySelectorAll("[data-hero-product]")];
     const foodMotions = [...document.querySelectorAll("[data-food-motion]")];
     const foodMotionTimers = new WeakMap();
     const scrollCue = document.querySelector(".scroll-cue");
@@ -2403,26 +2488,90 @@
         const rect = assembly.getBoundingClientRect();
         const travel = Math.max(1, assembly.offsetHeight - window.innerHeight);
         const sceneProgress = clamp(-rect.top / travel);
-        const assemble = smoothstep(0.08, 0.56, sceneProgress);
-        const revealFinal = smoothstep(0.48, 0.7, sceneProgress);
-        const productHeight = assemblyProduct.offsetHeight;
+        const revealFinal = smoothstep(0.78, 0.9, sceneProgress);
+        const finalTableau = smoothstep(0.82, 0.92, sceneProgress);
+        const isMobile = window.innerWidth <= 820;
+        const isCompactDesktop = !isMobile &&
+          (window.innerWidth <= 1120 || window.innerHeight < 850);
 
-        assemblyCopy.style.opacity = String(clamp(1 - sceneProgress * 2.35));
-        assemblyCopy.style.transform = `translate3d(0, ${sceneProgress * -24}px, 0)`;
+        assemblyCopy.style.opacity = String(1 - smoothstep(0.07, 0.23, sceneProgress));
+        assemblyCopy.style.transform = `translate3d(0, ${smoothstep(0.07, 0.23, sceneProgress) * -24}px, 0)`;
         assemblyFinal.style.opacity = String(revealFinal);
         assemblyFinal.style.transform = `translate3d(0, ${(1 - revealFinal) * 24}px, 0)`;
-        assemblyProduct.style.transform = `translate3d(${-7 * assemble}%, ${2 * assemble}%, 0) scale(${1 - assemble * 0.035})`;
-        scrollCue.style.opacity = String(clamp(1 - sceneProgress * 4));
+        scrollCue.style.opacity = String(1 - smoothstep(0.02, 0.1, sceneProgress));
 
-        ingredientLayers.forEach((layer, index) => {
-          const shift = Number(layer.dataset.shift || 0);
-          const x = Number(layer.dataset.x || 0);
-          const idle = Math.sin((sceneProgress * 8) + index) * (1 - assemble) * 3;
-          layer.style.transform = `translate3d(${x * productHeight * (1 - assemble)}px, ${shift * productHeight * assemble + idle}px, 0)`;
-        });
+        heroProducts.forEach((product) => {
+          const name = product.dataset.heroProduct;
+          const start = Number(product.dataset.start || 0);
+          const stagger = Number(product.dataset.stagger || 0);
+          const entrance = smoothstep(Math.max(0, start - 0.04), start + 0.1, sceneProgress);
+          let focusAmount = 0;
+          let productOpacity;
 
-        ingredientLabels.forEach((label) => {
-          label.style.opacity = String(clamp((assemble - 0.72) * 3.8));
+          if (isMobile) {
+            if (name === "panozzo") {
+              productOpacity = 1 - smoothstep(0.29, 0.39, sceneProgress);
+            } else if (name === "pasta") {
+              productOpacity = smoothstep(0.24, 0.34, sceneProgress) *
+                (1 - smoothstep(0.59, 0.69, sceneProgress));
+            } else {
+              productOpacity = smoothstep(0.55, 0.65, sceneProgress);
+            }
+            focusAmount = productOpacity;
+          } else {
+            if (name === "panozzo") {
+              focusAmount = 1 - smoothstep(0.22, 0.34, sceneProgress);
+              productOpacity = Math.max(focusAmount, finalTableau);
+            } else if (name === "pasta") {
+              focusAmount = smoothstep(0.2, 0.3, sceneProgress) *
+                (1 - smoothstep(0.5, 0.62, sceneProgress));
+              productOpacity = Math.max(focusAmount, finalTableau);
+            } else {
+              focusAmount = smoothstep(0.48, 0.58, sceneProgress) *
+                (1 - smoothstep(0.8, 0.9, sceneProgress));
+              productOpacity = Math.max(focusAmount, finalTableau);
+            }
+          }
+
+          const showcase = product.parentElement;
+          const showcaseCenterOffset = showcase.clientWidth / 2 -
+            (product.offsetLeft + product.offsetWidth / 2);
+          const viewportCenterOffset = window.innerWidth / 2 -
+            (showcase.getBoundingClientRect().left + product.offsetLeft + product.offsetWidth / 2);
+          const centerShift = smoothstep(0.18, 0.28, sceneProgress);
+          const centerOffset = isMobile ? 0 :
+            showcaseCenterOffset + (viewportCenterOffset - showcaseCenterOffset) * centerShift;
+          const focusScale = isMobile ? (name === "pasta" ? 1.1 : 1.04) :
+            isCompactDesktop ? (name === "pasta" ? 1.32 : 1.14) :
+            (name === "pasta" ? 1.46 : 1.22);
+          const scale = (0.94 + entrance * 0.06) * (1 + (focusScale - 1) * focusAmount);
+          product.style.opacity = String(productOpacity);
+          product.style.zIndex = focusAmount > 0.05 ? "5" : "2";
+          product.style.setProperty("--word-opacity", String(focusAmount * (isMobile ? 0.06 : 0.12)));
+          product.style.transform = `translate3d(${centerOffset * focusAmount}px, ${(1 - entrance) * 18}px, 0) scale(${scale})`;
+
+          let isComplete = true;
+          product.querySelectorAll(".hero-layer").forEach((layer, index) => {
+            const layerStart = start + index * stagger;
+            const rawProgress = clamp((sceneProgress - layerStart) / 0.14);
+            const easeOut = 1 - Math.pow(1 - rawProgress, 3);
+            const layerProgress = easeOut +
+              Math.sin(rawProgress * Math.PI * 3) * (1 - rawProgress) * 0.045;
+            const remaining = 1 - layerProgress;
+            const fromX = Number(layer.dataset.fromX || 0);
+            const fromY = Number(layer.dataset.fromY || 0);
+            const fromRotate = Number(layer.dataset.fromRotate || 0);
+            const fromScale = Number(layer.dataset.fromScale || 1);
+            const motionScale = isMobile ? 0.62 : isCompactDesktop ? 0.74 : 1;
+            const currentScale = 1 + (fromScale - 1) * remaining;
+            const idle = Math.sin(sceneProgress * 18 + index) * remaining * 2;
+
+            layer.style.opacity = String(clamp(0.7 + layerProgress * 0.3));
+            layer.style.transform = `translate3d(${fromX * remaining * motionScale}px, ${fromY * remaining * motionScale + idle}px, 0) rotate(${fromRotate * remaining}deg) scale(${currentScale})`;
+            if (layerProgress < 0.995) isComplete = false;
+          });
+
+          product.classList.toggle("is-complete", isComplete && productOpacity > 0.8);
         });
 
       }
