@@ -1066,6 +1066,11 @@
       font-size: 8rem;
     }
 
+    .clear-soir {
+      font-family: "Arial Narrow", "Helvetica Neue Condensed", Arial, sans-serif;
+      font-weight: 900;
+    }
+
     .pizza-world p {
       margin: 0;
       font-size: 1rem;
@@ -1149,6 +1154,25 @@
       height: 100%;
       object-fit: contain;
       filter: drop-shadow(0 24px 24px rgba(17, 17, 15, 0.3));
+      pointer-events: none;
+    }
+
+    .pizza-more-tag {
+      position: absolute;
+      top: 48%;
+      left: 50%;
+      z-index: 2;
+      min-width: 88px;
+      padding: 12px 16px 10px;
+      border: 2px solid var(--ink);
+      color: var(--green-deep);
+      background: var(--yellow);
+      box-shadow: 7px 8px 0 rgba(17, 17, 15, 0.2);
+      font-family: Impact, "Arial Narrow", sans-serif;
+      font-size: 1.75rem;
+      line-height: 1;
+      text-transform: uppercase;
+      transform: translate(-50%, -50%) rotate(-7deg);
       pointer-events: none;
     }
 
@@ -2667,12 +2691,16 @@
           <button class="pizza-card" type="button" data-pizza-index="3" aria-label="Voir la part Paola">
             <img src="../assets/pizza-slice-paola.png" alt="Part de pizza Paola CAVA" loading="lazy" decoding="async">
           </button>
+          <button class="pizza-card pizza-card-more" type="button" data-pizza-index="4" aria-label="Découvrir les autres saveurs disponibles sur place">
+            <img src="../assets/pizza-slice-francesca.png" alt="Autres saveurs de pizza à découvrir chez CAVA" loading="lazy" decoding="async">
+            <span class="pizza-more-tag" aria-hidden="true">Et +</span>
+          </button>
         </div>
 
         <div class="pizza-slider-footer">
           <button class="pizza-slider-nav" type="button" data-pizza-prev aria-label="Pizza précédente" title="Pizza précédente">←</button>
           <div class="pizza-slider-meta" aria-live="polite">
-            <span class="pizza-slider-count" id="pizza-slider-count">01 / 04</span>
+            <span class="pizza-slider-count" id="pizza-slider-count">01 / 05</span>
             <h3 id="pizza-slider-name">Margherita</h3>
             <p id="pizza-slider-description">Sauce tomate, mozzarella fior di latte et basilic.</p>
             <div class="pizza-slider-prices" aria-label="Tarifs pizza à la part">
@@ -2689,7 +2717,7 @@
     <section class="pizza-world" aria-labelledby="pizza-title">
       <img src="../assets/hero-pizza-collection.jpg" alt="Collection de pizzas CAVA" loading="lazy" decoding="async">
       <div class="pizza-world-copy">
-        <h2 class="display" id="pizza-title">Le soir, pizzas entières.</h2>
+        <h2 class="display" id="pizza-title">Le <span class="clear-soir">soir</span>, pizzas entières.</h2>
         <p>Nos pizzas classiques sont préparées minute et servies entières, avec une pâte maturée et des produits italiens.</p>
       </div>
     </section>
@@ -2888,6 +2916,10 @@
       {
         name: "Paola",
         description: "Fior di latte, roquette, tomates cerises, jambon de Parme et parmesan."
+      },
+      {
+        name: "Encore plus",
+        description: "Et bien d'autres saveurs à découvrir sur place."
       }
     ];
 
