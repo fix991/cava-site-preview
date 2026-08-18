@@ -1267,12 +1267,26 @@
       line-height: 1.4;
     }
 
-    .pizza-slider-price {
-      display: inline-block;
-      margin-top: 10px;
-      color: var(--yellow);
-      font-size: 0.88rem;
+    .pizza-slider-prices {
+      max-width: 420px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin: 12px auto 0;
+    }
+
+    .pizza-slider-prices span {
+      min-width: 0;
+      display: grid;
+      gap: 3px;
+      font-size: 0.62rem;
       font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .pizza-slider-prices strong {
+      color: var(--yellow);
+      font-size: 0.92rem;
     }
 
     .menu-section {
@@ -2669,7 +2683,11 @@
             <span class="pizza-slider-count" id="pizza-slider-count">01 / 04</span>
             <h3 id="pizza-slider-name">Margherita</h3>
             <p id="pizza-slider-description">Sauce tomate, mozzarella fior di latte et basilic.</p>
-            <strong class="pizza-slider-price" id="pizza-slider-price">11.50€</strong>
+            <div class="pizza-slider-prices" aria-label="Tarifs pizza à la part">
+              <span>2 slices<strong>9€</strong></span>
+              <span>3 slices<strong>12.50€</strong></span>
+              <span>4 slices<strong>16€</strong></span>
+            </div>
           </div>
           <button class="pizza-slider-nav" type="button" data-pizza-next aria-label="Pizza suivante" title="Pizza suivante">→</button>
         </div>
@@ -2857,23 +2875,19 @@
     const pizzaSlides = [
       {
         name: "Margherita",
-        description: "Sauce tomate, mozzarella fior di latte et basilic.",
-        price: "11.50€"
+        description: "Sauce tomate, mozzarella fior di latte et basilic."
       },
       {
         name: "Francesca",
-        description: "Jambon cuit, champignons, sauce tomate, fior di latte et basilic.",
-        price: "12.50€"
+        description: "Jambon cuit, champignons, sauce tomate, fior di latte et basilic."
       },
       {
         name: "Natalia",
-        description: "Tomates rôties, jambon cru, stracciatella, pesto de basilic et parmesan.",
-        price: "13.50€"
+        description: "Tomates rôties, jambon cru, stracciatella, pesto de basilic et parmesan."
       },
       {
         name: "Paola",
-        description: "Fior di latte, roquette, tomates cerises, jambon de Parme et parmesan.",
-        price: "14€"
+        description: "Fior di latte, roquette, tomates cerises, jambon de Parme et parmesan."
       }
     ];
 
@@ -2881,7 +2895,6 @@
     const pizzaCards = [...pizzaDeck.querySelectorAll(".pizza-card")];
     const pizzaName = document.getElementById("pizza-slider-name");
     const pizzaDescription = document.getElementById("pizza-slider-description");
-    const pizzaPrice = document.getElementById("pizza-slider-price");
     const pizzaCount = document.getElementById("pizza-slider-count");
     let activePizza = 0;
     let pizzaPointerStart = null;
@@ -2904,7 +2917,6 @@
       const pizza = pizzaSlides[activePizza];
       pizzaName.textContent = pizza.name;
       pizzaDescription.textContent = pizza.description;
-      pizzaPrice.textContent = pizza.price;
       pizzaCount.textContent = `${String(activePizza + 1).padStart(2, "0")} / ${String(pizzaSlides.length).padStart(2, "0")}`;
     }
 
