@@ -118,7 +118,7 @@
       list-style: none;
     }
 
-    .nav-links:last-child {
+    .nav-links:last-of-type {
       justify-content: flex-end;
       padding-left: 24px;
     }
@@ -182,9 +182,13 @@
     .order-link {
       min-height: 42px;
       padding: 0 18px;
-      color: var(--paper);
-      background: var(--green);
-      border-color: var(--green);
+      color: var(--ink);
+      background: var(--yellow);
+      border-color: var(--ink);
+    }
+
+    .mobile-command {
+      display: none;
     }
 
     .order-link:hover,
@@ -587,10 +591,7 @@
     }
 
     .guide-index::before {
-      content: "";
-      width: 34px;
-      height: 2px;
-      background: currentColor;
+      display: none;
     }
 
     .guide-intro h2 {
@@ -629,8 +630,8 @@
     .guide-tagline {
       display: inline-block;
       margin-top: 34px;
-      padding-top: 16px;
-      border-top: 1px solid currentColor;
+      padding-top: 0;
+      border-top: 0;
       font-size: 0.72rem;
       font-weight: 900;
       text-transform: uppercase;
@@ -788,7 +789,7 @@
     }
 
     .guide-steps {
-      border-top: 1px solid currentColor;
+      border-top: 0;
     }
 
     .guide-step {
@@ -796,7 +797,7 @@
       grid-template-columns: 34px minmax(0, 1fr);
       gap: 14px;
       padding: 15px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      border-bottom: 0;
     }
 
     .pasta-guide .guide-step {
@@ -1071,6 +1072,188 @@
       font-weight: 800;
       line-height: 1.5;
       text-shadow: 0 2px 18px rgba(0, 0, 0, 0.5);
+    }
+
+    .pizza-selector {
+      min-height: 100svh;
+      display: grid;
+      grid-template-columns: minmax(280px, 0.72fr) minmax(580px, 1.28fr);
+      align-items: center;
+      gap: 4vw;
+      padding: 94px 5.5%;
+      overflow: hidden;
+      color: var(--paper);
+      background: var(--red);
+      border-top: 1px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+    }
+
+    .pizza-selector-copy {
+      position: relative;
+      z-index: 3;
+    }
+
+    .pizza-selector-copy h2 {
+      max-width: 640px;
+      font-size: 6.4rem;
+    }
+
+    .pizza-selector-copy > p:last-child {
+      max-width: 440px;
+      margin: 26px 0 0;
+      font-size: 0.96rem;
+      font-weight: 800;
+      line-height: 1.5;
+    }
+
+    .pizza-slider-shell {
+      min-width: 0;
+      min-height: 680px;
+      display: grid;
+      grid-template-rows: minmax(500px, 1fr) auto;
+      align-items: center;
+    }
+
+    .pizza-deck {
+      --pizza-shift: clamp(160px, 16vw, 250px);
+      position: relative;
+      width: 100%;
+      height: 520px;
+      touch-action: pan-y;
+      user-select: none;
+    }
+
+    .pizza-card {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 1;
+      width: min(410px, 35vw);
+      aspect-ratio: 1;
+      padding: 0;
+      overflow: hidden;
+      border: 6px solid var(--paper);
+      border-radius: 50%;
+      background: var(--paper);
+      box-shadow: 0 28px 54px rgba(17, 17, 15, 0.26);
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, -42%) scale(0.58);
+      transition:
+        opacity 420ms ease,
+        filter 420ms ease,
+        transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .pizza-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    .pizza-card[data-position="0"] {
+      z-index: 4;
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50%, -50%) rotate(0deg) scale(1);
+    }
+
+    .pizza-card[data-position="-1"] {
+      z-index: 2;
+      opacity: 0.72;
+      filter: saturate(0.78) brightness(0.82);
+      pointer-events: auto;
+      transform: translate(calc(-50% - var(--pizza-shift)), -43%) rotate(-15deg) scale(0.74);
+    }
+
+    .pizza-card[data-position="1"] {
+      z-index: 2;
+      opacity: 0.72;
+      filter: saturate(0.78) brightness(0.82);
+      pointer-events: auto;
+      transform: translate(calc(-50% + var(--pizza-shift)), -43%) rotate(15deg) scale(0.74);
+    }
+
+    .pizza-card:focus-visible {
+      outline: 4px solid var(--yellow);
+      outline-offset: 5px;
+    }
+
+    .pizza-slider-footer {
+      position: relative;
+      z-index: 5;
+      display: grid;
+      grid-template-columns: 56px minmax(0, 1fr) 56px;
+      align-items: center;
+      gap: 22px;
+      max-width: 760px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .pizza-slider-nav {
+      width: 56px;
+      height: 56px;
+      display: grid;
+      place-items: center;
+      padding: 0;
+      border: 1px solid var(--paper);
+      border-radius: 50%;
+      color: var(--paper);
+      background: transparent;
+      font-size: 1.7rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: color 180ms ease, background-color 180ms ease, transform 180ms ease;
+    }
+
+    .pizza-slider-nav:hover,
+    .pizza-slider-nav:focus-visible {
+      color: var(--ink);
+      background: var(--yellow);
+      transform: scale(1.06);
+    }
+
+    .pizza-slider-meta {
+      min-width: 0;
+      text-align: center;
+    }
+
+    .pizza-slider-count {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--yellow);
+      font-size: 0.7rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .pizza-slider-meta h3 {
+      margin: 0;
+      font-family: Impact, "Arial Narrow", sans-serif;
+      font-size: 3.5rem;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .pizza-slider-meta p {
+      max-width: 560px;
+      min-height: 44px;
+      margin: 10px auto 0;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.82rem;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .pizza-slider-price {
+      display: inline-block;
+      margin-top: 10px;
+      color: var(--yellow);
+      font-size: 0.88rem;
+      font-weight: 900;
     }
 
     .menu-section {
@@ -1563,6 +1746,26 @@
         grid-row: 1 / span 2;
       }
 
+      .pizza-selector {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .pizza-selector-copy {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(260px, 420px);
+        align-items: end;
+        gap: 36px;
+      }
+
+      .pizza-selector-copy > p:last-child {
+        margin: 0;
+      }
+
+      .pizza-slider-shell {
+        min-height: 650px;
+      }
+
       .portrait-copy h2,
       .manifesto-words span,
       .pizza-world h2,
@@ -1583,7 +1786,7 @@
       }
 
       .nav {
-        grid-template-columns: 44px 1fr 44px;
+        grid-template-columns: 44px minmax(0, 1fr) auto;
         padding: 0 14px;
       }
 
@@ -1596,13 +1799,23 @@
       }
 
       .brand {
-        width: 116px;
+        width: 104px;
         justify-self: center;
       }
 
-      .nav-spacer {
-        display: block;
-        width: 44px;
+      .mobile-command {
+        min-height: 36px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        justify-self: end;
+        padding: 0 10px;
+        border: 1px solid var(--ink);
+        color: var(--ink);
+        background: var(--yellow);
+        font-size: 0.64rem;
+        font-weight: 900;
+        text-transform: uppercase;
       }
 
       .assembly {
@@ -1710,6 +1923,10 @@
         margin-bottom: 28px;
       }
 
+      .guide-index::before {
+        display: none;
+      }
+
       .guide-intro h2 {
         font-size: 4.25rem;
       }
@@ -1723,9 +1940,25 @@
         margin-top: 20px;
       }
 
+      .guide-tagline {
+        padding-top: 0;
+        border-top: 0;
+      }
+
       .guide-visual {
         min-height: 620px;
         height: 76svh;
+      }
+
+      .panozzo-guide .guide-visual {
+        overflow: hidden;
+      }
+
+      .panozzo-guide .food-motion {
+        width: auto;
+        max-width: 100%;
+        height: 100%;
+        max-height: 100%;
       }
 
       .pasta-guide .guide-visual {
@@ -1744,12 +1977,23 @@
       }
 
       .guide-mode {
+        position: relative;
+        z-index: 2;
         grid-column: auto;
         display: block;
       }
 
       .guide-mode h3 {
         font-size: 2.65rem;
+      }
+
+      .guide-steps {
+        border-top: 0;
+      }
+
+      .guide-step,
+      .pasta-guide .guide-step {
+        border-bottom: 0;
       }
 
       .formula-band {
@@ -1821,6 +2065,72 @@
 
       .pizza-world-copy {
         padding: 80px 20px 34px;
+      }
+
+      .pizza-selector {
+        min-height: auto;
+        gap: 18px;
+        padding: 78px 20px 68px;
+      }
+
+      .pizza-selector-copy {
+        display: block;
+      }
+
+      .pizza-selector-copy h2 {
+        max-width: 420px;
+        font-size: 4rem;
+      }
+
+      .pizza-selector-copy > p:last-child {
+        max-width: 360px;
+        margin-top: 20px;
+        font-size: 0.86rem;
+      }
+
+      .pizza-slider-shell {
+        min-height: 530px;
+        grid-template-rows: 370px auto;
+      }
+
+      .pizza-deck {
+        --pizza-shift: clamp(98px, 28vw, 130px);
+        height: 360px;
+      }
+
+      .pizza-card {
+        width: min(76vw, 300px);
+        border-width: 4px;
+      }
+
+      .pizza-card[data-position="-1"] {
+        opacity: 0.5;
+        transform: translate(calc(-50% - var(--pizza-shift)), -42%) rotate(-14deg) scale(0.68);
+      }
+
+      .pizza-card[data-position="1"] {
+        opacity: 0.5;
+        transform: translate(calc(-50% + var(--pizza-shift)), -42%) rotate(14deg) scale(0.68);
+      }
+
+      .pizza-slider-footer {
+        grid-template-columns: 44px minmax(0, 1fr) 44px;
+        gap: 10px;
+      }
+
+      .pizza-slider-nav {
+        width: 44px;
+        height: 44px;
+        font-size: 1.35rem;
+      }
+
+      .pizza-slider-meta h3 {
+        font-size: 2.75rem;
+      }
+
+      .pizza-slider-meta p {
+        min-height: 58px;
+        font-size: 0.75rem;
       }
 
       .menu-section,
@@ -1932,6 +2242,23 @@
       .guide-visual {
         min-height: 540px;
         height: 70svh;
+      }
+
+      .pizza-selector-copy h2 {
+        font-size: 3.35rem;
+      }
+
+      .pizza-slider-shell {
+        min-height: 500px;
+        grid-template-rows: 330px auto;
+      }
+
+      .pizza-deck {
+        height: 320px;
+      }
+
+      .pizza-slider-meta h3 {
+        font-size: 2.35rem;
       }
 
       .salade-guide .guide-visual {
@@ -2080,7 +2407,7 @@
       <li><a href="#avis">Avis</a></li>
       <li><a class="order-link" href="https://mylightspeed.app/GZRCHQJG/C-ordering/menu" target="_blank" rel="noreferrer">Commander</a></li>
     </ul>
-    <span class="nav-spacer" aria-hidden="true"></span>
+    <a class="mobile-command" href="https://mylightspeed.app/GZRCHQJG/C-ordering/menu" target="_blank" rel="noreferrer">Commander</a>
   </nav>
 
   <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
@@ -2284,6 +2611,44 @@
       </div>
     </section>
 
+    <section class="pizza-selector" aria-labelledby="pizza-selector-title">
+      <div class="pizza-selector-copy reveal">
+        <div>
+          <p class="eyebrow">La carte du soir</p>
+          <h2 class="display" id="pizza-selector-title">Laquelle te tente&nbsp;?</h2>
+        </div>
+        <p>Des recettes préparées minute, avec nos produits italiens et une pâte qui prend son temps.</p>
+      </div>
+
+      <div class="pizza-slider-shell">
+        <div class="pizza-deck" id="pizza-deck" role="group" aria-label="Sélection de pizzas CAVA">
+          <button class="pizza-card" type="button" data-pizza-index="0" aria-label="Voir la Margherita">
+            <img src="../assets/pizza-margherita.jpg" alt="Pizza Margherita CAVA" loading="lazy" decoding="async">
+          </button>
+          <button class="pizza-card" type="button" data-pizza-index="1" aria-label="Voir la Francesca">
+            <img src="../assets/pizza-francesca-new.jpg" alt="Pizza Francesca CAVA" loading="lazy" decoding="async">
+          </button>
+          <button class="pizza-card" type="button" data-pizza-index="2" aria-label="Voir la Natalia">
+            <img src="../assets/pizza-natalia.jpg" alt="Pizza Natalia CAVA" loading="lazy" decoding="async">
+          </button>
+          <button class="pizza-card" type="button" data-pizza-index="3" aria-label="Voir la Paola">
+            <img src="../assets/pizza-paola.jpg" alt="Pizza Paola CAVA" loading="lazy" decoding="async">
+          </button>
+        </div>
+
+        <div class="pizza-slider-footer">
+          <button class="pizza-slider-nav" type="button" data-pizza-prev aria-label="Pizza précédente" title="Pizza précédente">←</button>
+          <div class="pizza-slider-meta" aria-live="polite">
+            <span class="pizza-slider-count" id="pizza-slider-count">01 / 04</span>
+            <h3 id="pizza-slider-name">Margherita</h3>
+            <p id="pizza-slider-description">Sauce tomate, mozzarella fior di latte et basilic.</p>
+            <strong class="pizza-slider-price" id="pizza-slider-price">11.50€</strong>
+          </div>
+          <button class="pizza-slider-nav" type="button" data-pizza-next aria-label="Pizza suivante" title="Pizza suivante">→</button>
+        </div>
+      </div>
+    </section>
+
     <section class="menu-section" id="menu" aria-labelledby="menu-title">
       <div class="menu-header reveal">
         <div>
@@ -2461,6 +2826,111 @@
         panel.hidden = isOpen;
       });
     });
+
+    const pizzaSlides = [
+      {
+        name: "Margherita",
+        description: "Sauce tomate, mozzarella fior di latte et basilic.",
+        price: "11.50€"
+      },
+      {
+        name: "Francesca",
+        description: "Jambon cuit, champignons, sauce tomate, fior di latte et basilic.",
+        price: "12.50€"
+      },
+      {
+        name: "Natalia",
+        description: "Tomates rôties, jambon cru, stracciatella, pesto de basilic et parmesan.",
+        price: "13.50€"
+      },
+      {
+        name: "Paola",
+        description: "Fior di latte, roquette, tomates cerises, jambon de Parme et parmesan.",
+        price: "14€"
+      }
+    ];
+
+    const pizzaDeck = document.getElementById("pizza-deck");
+    const pizzaCards = [...pizzaDeck.querySelectorAll(".pizza-card")];
+    const pizzaName = document.getElementById("pizza-slider-name");
+    const pizzaDescription = document.getElementById("pizza-slider-description");
+    const pizzaPrice = document.getElementById("pizza-slider-price");
+    const pizzaCount = document.getElementById("pizza-slider-count");
+    let activePizza = 0;
+    let pizzaPointerStart = null;
+    let suppressPizzaClick = false;
+
+    function relativePizzaPosition(index) {
+      let position = (index - activePizza + pizzaSlides.length) % pizzaSlides.length;
+      if (position > pizzaSlides.length / 2) position -= pizzaSlides.length;
+      return position;
+    }
+
+    function renderPizzaSlider() {
+      pizzaCards.forEach((card, index) => {
+        const position = relativePizzaPosition(index);
+        card.dataset.position = String(position);
+        card.setAttribute("aria-current", position === 0 ? "true" : "false");
+        card.tabIndex = Math.abs(position) <= 1 ? 0 : -1;
+      });
+
+      const pizza = pizzaSlides[activePizza];
+      pizzaName.textContent = pizza.name;
+      pizzaDescription.textContent = pizza.description;
+      pizzaPrice.textContent = pizza.price;
+      pizzaCount.textContent = `${String(activePizza + 1).padStart(2, "0")} / ${String(pizzaSlides.length).padStart(2, "0")}`;
+    }
+
+    function selectPizza(index) {
+      activePizza = (index + pizzaSlides.length) % pizzaSlides.length;
+      renderPizzaSlider();
+    }
+
+    pizzaCards.forEach((card) => {
+      card.addEventListener("click", (event) => {
+        if (suppressPizzaClick) {
+          event.preventDefault();
+          return;
+        }
+        selectPizza(Number(card.dataset.pizzaIndex));
+      });
+    });
+
+    document.querySelector("[data-pizza-prev]").addEventListener("click", () => selectPizza(activePizza - 1));
+    document.querySelector("[data-pizza-next]").addEventListener("click", () => selectPizza(activePizza + 1));
+
+    pizzaDeck.addEventListener("pointerdown", (event) => {
+      pizzaPointerStart = event.clientX;
+    });
+
+    pizzaDeck.addEventListener("pointerup", (event) => {
+      if (pizzaPointerStart === null) return;
+      const distance = event.clientX - pizzaPointerStart;
+      pizzaPointerStart = null;
+      if (Math.abs(distance) < 42) return;
+      suppressPizzaClick = true;
+      selectPizza(activePizza + (distance < 0 ? 1 : -1));
+      window.setTimeout(() => {
+        suppressPizzaClick = false;
+      }, 0);
+    });
+
+    pizzaDeck.addEventListener("pointercancel", () => {
+      pizzaPointerStart = null;
+    });
+
+    pizzaDeck.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        selectPizza(activePizza - 1);
+      }
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        selectPizza(activePizza + 1);
+      }
+    });
+
+    renderPizzaSlider();
 
     const nav = document.querySelector(".nav");
     const navToggle = document.querySelector(".nav-toggle");
