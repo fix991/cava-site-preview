@@ -1115,7 +1115,7 @@
     }
 
     .pizza-deck {
-      --pizza-shift: clamp(160px, 16vw, 250px);
+      --pizza-shift: clamp(155px, 14vw, 225px);
       position: relative;
       width: 100%;
       height: 520px;
@@ -1128,28 +1128,27 @@
       top: 50%;
       left: 50%;
       z-index: 1;
-      width: min(410px, 35vw);
+      width: min(430px, 32vw);
       aspect-ratio: 1;
       padding: 0;
-      overflow: hidden;
-      border: 6px solid var(--paper);
-      border-radius: 50%;
-      background: var(--paper);
-      box-shadow: 0 28px 54px rgba(17, 17, 15, 0.26);
+      overflow: visible;
+      border: 0;
+      background: transparent;
       cursor: pointer;
       opacity: 0;
       pointer-events: none;
-      transform: translate(-50%, -42%) scale(0.58);
+      transform: translate(-50%, -32%) scale(0.52);
       transition:
         opacity 420ms ease,
         filter 420ms ease,
-        transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+        transform 720ms cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .pizza-card img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
+      filter: drop-shadow(0 24px 24px rgba(17, 17, 15, 0.3));
       pointer-events: none;
     }
 
@@ -1157,28 +1156,48 @@
       z-index: 4;
       opacity: 1;
       pointer-events: auto;
-      transform: translate(-50%, -50%) rotate(0deg) scale(1);
+      transform: translate(-50%, -50%) rotate(0deg) scale(1.12);
     }
 
     .pizza-card[data-position="-1"] {
       z-index: 2;
-      opacity: 0.72;
-      filter: saturate(0.78) brightness(0.82);
+      opacity: 0.7;
+      filter: saturate(0.82) brightness(0.76);
       pointer-events: auto;
-      transform: translate(calc(-50% - var(--pizza-shift)), -43%) rotate(-15deg) scale(0.74);
+      transform: translate(calc(-50% - var(--pizza-shift)), -38%) rotate(-34deg) scale(0.7);
     }
 
     .pizza-card[data-position="1"] {
       z-index: 2;
-      opacity: 0.72;
-      filter: saturate(0.78) brightness(0.82);
+      opacity: 0.7;
+      filter: saturate(0.82) brightness(0.76);
       pointer-events: auto;
-      transform: translate(calc(-50% + var(--pizza-shift)), -43%) rotate(15deg) scale(0.74);
+      transform: translate(calc(-50% + var(--pizza-shift)), -38%) rotate(34deg) scale(0.7);
+    }
+
+    .pizza-card[data-position="2"] {
+      z-index: 1;
+      opacity: 0.34;
+      filter: saturate(0.68) brightness(0.62);
+      pointer-events: auto;
+      transform: translate(-50%, -76%) rotate(0deg) scale(0.56);
     }
 
     .pizza-card:focus-visible {
-      outline: 4px solid var(--yellow);
-      outline-offset: 5px;
+      outline: 0;
+    }
+
+    .pizza-card:focus-visible img {
+      filter: drop-shadow(0 0 10px var(--yellow)) drop-shadow(0 24px 24px rgba(17, 17, 15, 0.3));
+    }
+
+    .pizza-card[data-position="0"] img {
+      animation: pizza-slice-float 3.6s ease-in-out infinite alternate;
+    }
+
+    @keyframes pizza-slice-float {
+      from { transform: translateY(0); }
+      to { transform: translateY(-7px); }
     }
 
     .pizza-slider-footer {
@@ -2094,23 +2113,31 @@
       }
 
       .pizza-deck {
-        --pizza-shift: clamp(98px, 28vw, 130px);
+        --pizza-shift: clamp(82px, 24vw, 112px);
         height: 360px;
       }
 
       .pizza-card {
-        width: min(76vw, 300px);
-        border-width: 4px;
+        width: min(82vw, 320px);
+      }
+
+      .pizza-card[data-position="0"] {
+        transform: translate(-50%, -50%) rotate(0deg) scale(1.04);
       }
 
       .pizza-card[data-position="-1"] {
-        opacity: 0.5;
-        transform: translate(calc(-50% - var(--pizza-shift)), -42%) rotate(-14deg) scale(0.68);
+        opacity: 0.58;
+        transform: translate(calc(-50% - var(--pizza-shift)), -36%) rotate(-35deg) scale(0.62);
       }
 
       .pizza-card[data-position="1"] {
-        opacity: 0.5;
-        transform: translate(calc(-50% + var(--pizza-shift)), -42%) rotate(14deg) scale(0.68);
+        opacity: 0.58;
+        transform: translate(calc(-50% + var(--pizza-shift)), -36%) rotate(35deg) scale(0.62);
+      }
+
+      .pizza-card[data-position="2"] {
+        opacity: 0.28;
+        transform: translate(-50%, -72%) rotate(0deg) scale(0.5);
       }
 
       .pizza-slider-footer {
@@ -2622,17 +2649,17 @@
 
       <div class="pizza-slider-shell">
         <div class="pizza-deck" id="pizza-deck" role="group" aria-label="Sélection de pizzas CAVA">
-          <button class="pizza-card" type="button" data-pizza-index="0" aria-label="Voir la Margherita">
-            <img src="../assets/pizza-margherita.jpg" alt="Pizza Margherita CAVA" loading="lazy" decoding="async">
+          <button class="pizza-card" type="button" data-pizza-index="0" aria-label="Voir la part Margherita">
+            <img src="../assets/pizza-slice-margherita.png" alt="Part de pizza Margherita CAVA" loading="lazy" decoding="async">
           </button>
-          <button class="pizza-card" type="button" data-pizza-index="1" aria-label="Voir la Francesca">
-            <img src="../assets/pizza-francesca-new.jpg" alt="Pizza Francesca CAVA" loading="lazy" decoding="async">
+          <button class="pizza-card" type="button" data-pizza-index="1" aria-label="Voir la part Francesca">
+            <img src="../assets/pizza-slice-francesca.png" alt="Part de pizza Francesca CAVA" loading="lazy" decoding="async">
           </button>
-          <button class="pizza-card" type="button" data-pizza-index="2" aria-label="Voir la Natalia">
-            <img src="../assets/pizza-natalia.jpg" alt="Pizza Natalia CAVA" loading="lazy" decoding="async">
+          <button class="pizza-card" type="button" data-pizza-index="2" aria-label="Voir la part Natalia">
+            <img src="../assets/pizza-slice-natalia.png" alt="Part de pizza Natalia CAVA" loading="lazy" decoding="async">
           </button>
-          <button class="pizza-card" type="button" data-pizza-index="3" aria-label="Voir la Paola">
-            <img src="../assets/pizza-paola.jpg" alt="Pizza Paola CAVA" loading="lazy" decoding="async">
+          <button class="pizza-card" type="button" data-pizza-index="3" aria-label="Voir la part Paola">
+            <img src="../assets/pizza-slice-paola.png" alt="Part de pizza Paola CAVA" loading="lazy" decoding="async">
           </button>
         </div>
 
