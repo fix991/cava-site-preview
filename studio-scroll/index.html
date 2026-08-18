@@ -1066,11 +1066,6 @@
       font-size: 8rem;
     }
 
-    .clear-soir {
-      font-family: "Arial Narrow", "Helvetica Neue Condensed", Arial, sans-serif;
-      font-weight: 900;
-    }
-
     .pizza-world p {
       margin: 0;
       font-size: 1rem;
@@ -1470,61 +1465,6 @@
       margin: 44px auto 0;
     }
 
-    .slice-section {
-      display: grid;
-      grid-template-columns: minmax(0, 1.08fr) minmax(400px, 0.92fr);
-      min-height: 850px;
-      background: var(--yellow);
-    }
-
-    .slice-photo {
-      min-height: 650px;
-      margin: 0;
-      overflow: hidden;
-      border-right: 1px solid var(--ink);
-    }
-
-    .slice-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .slice-copy {
-      display: flex;
-      padding: 92px 8%;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .slice-copy h2 {
-      max-width: 600px;
-      font-size: 6.3rem;
-    }
-
-    .slice-prices {
-      border-top: 1px solid var(--ink);
-    }
-
-    .slice-price {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: baseline;
-      gap: 20px;
-      padding: 22px 0;
-      border-bottom: 1px solid var(--ink);
-    }
-
-    .slice-price strong {
-      font-size: 1rem;
-      text-transform: uppercase;
-    }
-
-    .slice-price span {
-      font-family: Impact, "Arial Narrow", sans-serif;
-      font-size: 2.6rem;
-    }
-
     .drinks {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1831,8 +1771,7 @@
       }
 
       .menu-header h2,
-      .reviews-head h2,
-      .slice-copy h2 {
+      .reviews-head h2 {
         font-size: 5.2rem;
       }
     }
@@ -2087,8 +2026,7 @@
         flex-direction: column;
       }
 
-      .manifesto-grid,
-      .slice-section {
+      .manifesto-grid {
         grid-template-columns: 1fr;
       }
 
@@ -2240,21 +2178,6 @@
         border-left: 0;
       }
 
-      .slice-photo {
-        min-height: 72svh;
-        border-right: 0;
-        border-bottom: 1px solid var(--ink);
-      }
-
-      .slice-copy {
-        min-height: 690px;
-        padding: 72px 20px 48px;
-      }
-
-      .slice-copy h2 {
-        font-size: 4.6rem;
-      }
-
       .drinks {
         grid-template-columns: 1fr;
       }
@@ -2346,10 +2269,6 @@
 
       .chapter-title {
         font-size: 2.55rem;
-      }
-
-      .slice-copy h2 {
-        font-size: 3.85rem;
       }
 
       .review {
@@ -2717,7 +2636,7 @@
     <section class="pizza-world" aria-labelledby="pizza-title">
       <img src="../assets/hero-pizza-collection.jpg" alt="Collection de pizzas CAVA" loading="lazy" decoding="async">
       <div class="pizza-world-copy">
-        <h2 class="display" id="pizza-title">Le <span class="clear-soir">soir</span>, pizzas entières.</h2>
+        <h2 class="display" id="pizza-title">Au dîner, pizzas entières.</h2>
         <p>Nos pizzas classiques sont préparées minute et servies entières, avec une pâte maturée et des produits italiens.</p>
       </div>
     </section>
@@ -2734,23 +2653,6 @@
       <div class="menu-accordion" id="menu-accordion"></div>
       <div class="menu-cta">
         <a class="button light" href="https://mylightspeed.app/GZRCHQJG/C-ordering/menu" target="_blank" rel="noreferrer">Voir le menu officiel</a>
-      </div>
-    </section>
-
-    <section class="slice-section" aria-labelledby="slice-title">
-      <figure class="slice-photo">
-        <img src="../assets/pizza-margherita.jpg" alt="Pizza Margherita CAVA" loading="lazy" decoding="async">
-      </figure>
-      <div class="slice-copy">
-        <div>
-          <p class="eyebrow">Pizza à la part</p>
-          <h2 class="display" id="slice-title">Une, deux, trois... à toi de voir.</h2>
-        </div>
-        <div class="slice-prices">
-          <div class="slice-price"><strong>2 slices</strong><span>9€</span></div>
-          <div class="slice-price"><strong>3 slices</strong><span>12.50€</span></div>
-          <div class="slice-price"><strong>4 slices</strong><span>16€</span></div>
-        </div>
       </div>
     </section>
 
