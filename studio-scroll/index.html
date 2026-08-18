@@ -385,7 +385,9 @@
       width: 100%;
       height: 100%;
       min-height: 0;
+      transform: scale(var(--hero-food-scale, 1));
       transform-origin: 50% 65%;
+      will-change: transform;
     }
 
     .hero-food-frame::before {
@@ -454,11 +456,11 @@
     @keyframes hero-food-float {
       0%,
       100% {
-        transform: translateY(0);
+        transform: translateY(0) scale(var(--hero-food-scale, 1));
       }
 
       50% {
-        transform: translateY(-5px);
+        transform: translateY(-5px) scale(var(--hero-food-scale, 1));
       }
     }
 
@@ -1604,8 +1606,8 @@
       }
 
       .assembly {
-        height: 280svh;
-        min-height: 2000px;
+        height: 320svh;
+        min-height: 2300px;
       }
 
       .assembly-sticky {
@@ -1640,7 +1642,7 @@
       }
 
       .hero-showcase {
-        top: clamp(360px, 54%, 365px);
+        top: calc(330px + var(--mobile-showcase-shift, 0px));
         right: 18px;
         bottom: max(22px, env(safe-area-inset-bottom));
         left: 18px;
@@ -1985,7 +1987,7 @@
       }
 
       .hero-showcase {
-        top: 330px;
+        top: calc(290px + var(--mobile-showcase-shift, 0px));
       }
 
       .assembly-final h2 {
@@ -2467,6 +2469,7 @@
     const assembly = document.querySelector(".assembly");
     const assemblyCopy = document.querySelector(".assembly-copy");
     const assemblyFinal = document.querySelector(".assembly-final");
+    const heroShowcase = document.querySelector(".hero-showcase");
     const heroProducts = [...document.querySelectorAll("[data-hero-product]")];
     const foodMotions = [...document.querySelectorAll("[data-food-motion]")];
     const foodMotionTimers = new WeakMap();
@@ -2529,9 +2532,10 @@
         const rect = assembly.getBoundingClientRect();
         const travel = Math.max(1, assembly.offsetHeight - window.innerHeight);
         const sceneProgress = clamp(-rect.top / travel);
-        const revealFinal = smoothstep(0.78, 0.9, sceneProgress);
-        const finalTableau = smoothstep(0.82, 0.92, sceneProgress);
         const isMobile = window.innerWidth <= 820;
+        const isCompactMobile = isMobile && (window.innerWidth <= 374 || window.innerHeight <= 640);
+        const revealFinal = smoothstep(isMobile ? 0.88 : 0.78, isMobile ? 0.95 : 0.9, sceneProgress);
+        const finalTableau = smoothstep(0.82, 0.92, sceneProgress);
         const isCompactDesktop = !isMobile &&
           (window.innerWidth <= 1120 || window.innerHeight < 850);
 
@@ -2540,6 +2544,12 @@
         assemblyFinal.style.opacity = String(revealFinal);
         assemblyFinal.style.transform = `translate3d(0, ${(1 - revealFinal) * 24}px, 0)`;
         scrollCue.style.opacity = String(1 - smoothstep(0.02, 0.1, sceneProgress));
+        const mobileShowcaseShift = isMobile ?
+          smoothstep(0.82, 0.88, sceneProgress) * (isCompactMobile ? 45 : 72) : 0;
+        heroShowcase.style.setProperty(
+          "--mobile-showcase-shift",
+          `${mobileShowcaseShift}px`
+        );
 
         heroProducts.forEach((product) => {
           const name = product.dataset.heroProduct;
@@ -2551,12 +2561,12 @@
 
           if (isMobile) {
             if (name === "panozzo") {
-              productOpacity = 1 - smoothstep(0.29, 0.39, sceneProgress);
+              productOpacity = 1 - smoothstep(0.36, 0.42, sceneProgress);
             } else if (name === "pasta") {
-              productOpacity = smoothstep(0.24, 0.34, sceneProgress) *
-                (1 - smoothstep(0.59, 0.69, sceneProgress));
+              productOpacity = smoothstep(0.36, 0.42, sceneProgress) *
+                (1 - smoothstep(0.64, 0.7, sceneProgress));
             } else {
-              productOpacity = smoothstep(0.55, 0.65, sceneProgress);
+              productOpacity = smoothstep(0.64, 0.7, sceneProgress);
             }
             focusAmount = productOpacity;
           } else {
@@ -2582,14 +2592,34 @@
           const centerShift = smoothstep(0.18, 0.28, sceneProgress);
           const centerOffset = isMobile ? 0 :
             showcaseCenterOffset + (viewportCenterOffset - showcaseCenterOffset) * centerShift;
-          const focusScale = isMobile ? (name === "pasta" ? 1.1 : 1.04) :
+          const focusScale = isMobile ?
+            (name === "pasta" ? 1.18 : name === "salade" ? 1.2 : 1.12) :
             isCompactDesktop ? (name === "pasta" ? 1.32 : 1.14) :
             (name === "pasta" ? 1.46 : 1.22);
           const scale = (0.94 + entrance * 0.06) * (1 + (focusScale - 1) * focusAmount);
+          let mobileSwapX = 0;
+          let mobileSwapY = 0;
+
+          if (isMobile) {
+            const transitionOffset = 1 - productOpacity;
+            if (name === "panozzo") {
+              mobileSwapX = -34 * transitionOffset;
+              mobileSwapY = -8 * transitionOffset;
+            } else if (name === "pasta") {
+              const isLeaving = sceneProgress > 0.52;
+              mobileSwapX = (isLeaving ? -34 : 34) * transitionOffset;
+              mobileSwapY = (isLeaving ? -8 : 8) * transitionOffset;
+            } else {
+              mobileSwapX = 34 * transitionOffset;
+              mobileSwapY = 8 * transitionOffset;
+            }
+          }
+
           product.style.opacity = String(productOpacity);
           product.style.zIndex = focusAmount > 0.05 ? "5" : "2";
           product.style.setProperty("--word-opacity", String(focusAmount * (isMobile ? 0.06 : 0.12)));
-          product.style.transform = `translate3d(${centerOffset * focusAmount}px, ${(1 - entrance) * 18}px, 0) scale(${scale})`;
+          product.style.setProperty("--hero-food-scale", String(isMobile ? scale : 1));
+          product.style.transform = `translate3d(${centerOffset * focusAmount + mobileSwapX}px, ${(1 - entrance) * 18 + mobileSwapY}px, 0) scale(${isMobile ? 1 : scale})`;
           product.querySelector("figcaption").style.opacity = String(
             isMobile ? smoothstep(0.72, 0.9, productOpacity) : 1
           );
@@ -2597,7 +2627,7 @@
           let isComplete = true;
           product.querySelectorAll(".hero-layer").forEach((layer, index) => {
             const layerStart = start + index * stagger;
-            const rawProgress = clamp((sceneProgress - layerStart) / 0.14);
+            const rawProgress = clamp((sceneProgress - layerStart) / (isMobile ? 0.16 : 0.14));
             const easeOut = 1 - Math.pow(1 - rawProgress, 3);
             const layerProgress = easeOut +
               Math.sin(rawProgress * Math.PI * 3) * (1 - rawProgress) * 0.045;
@@ -2606,12 +2636,14 @@
             const fromY = Number(layer.dataset.fromY || 0);
             const fromRotate = Number(layer.dataset.fromRotate || 0);
             const fromScale = Number(layer.dataset.fromScale || 1);
-            const motionScale = isMobile ? 0.62 : isCompactDesktop ? 0.74 : 1;
+            const motionScale = isMobile ? 0.86 : isCompactDesktop ? 0.74 : 1;
+            const layerMotionScale = isMobile && index === 0 ? 0 : motionScale;
             const currentScale = 1 + (fromScale - 1) * remaining;
             const idle = Math.sin(sceneProgress * 18 + index) * remaining * 2;
+            const startOpacity = isMobile ? (index === 0 ? 1 : 0.22) : 0.7;
 
-            layer.style.opacity = String(clamp(0.7 + layerProgress * 0.3));
-            layer.style.transform = `translate3d(${fromX * remaining * motionScale}px, ${fromY * remaining * motionScale + idle}px, 0) rotate(${fromRotate * remaining}deg) scale(${currentScale})`;
+            layer.style.opacity = String(clamp(startOpacity + layerProgress * (1 - startOpacity)));
+            layer.style.transform = `translate3d(${fromX * remaining * layerMotionScale}px, ${fromY * remaining * layerMotionScale + idle}px, 0) rotate(${fromRotate * remaining}deg) scale(${currentScale})`;
             if (layerProgress < 0.995) isComplete = false;
           });
 
@@ -2635,15 +2667,16 @@
     updateScroll();
 
     if (!reducedMotion) {
+      const foodMotionThreshold = window.innerWidth <= 820 ? 0.28 : 0.48;
       const foodMotionObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
-          if (entry.intersectionRatio >= 0.48 && !entry.target.classList.contains("is-active")) {
+          if (entry.intersectionRatio >= foodMotionThreshold && !entry.target.classList.contains("is-active")) {
             playFoodMotion(entry.target);
           } else if (!entry.isIntersecting) {
             resetFoodMotion(entry.target);
           }
         });
-      }, { threshold: [0, 0.48], rootMargin: "-5% 0px" });
+      }, { threshold: [0, foodMotionThreshold], rootMargin: window.innerWidth <= 820 ? "-2% 0px -6%" : "-5% 0px" });
 
       foodMotions.forEach((motion) => {
         motion.classList.add("motion-ready");
