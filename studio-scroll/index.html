@@ -1116,11 +1116,15 @@
 
     .pizza-deck {
       --pizza-shift: clamp(155px, 14vw, 225px);
+      --pizza-exit-shift: clamp(300px, 28vw, 450px);
       position: relative;
       width: 100%;
       height: 520px;
       touch-action: pan-y;
+      overscroll-behavior-inline: contain;
       user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
     }
 
     .pizza-card {
@@ -1150,6 +1154,7 @@
       object-fit: contain;
       filter: drop-shadow(0 24px 24px rgba(17, 17, 15, 0.3));
       pointer-events: none;
+      -webkit-user-drag: none;
     }
 
     .pizza-more-tag {
@@ -1194,12 +1199,20 @@
       transform: translate(calc(-50% + var(--pizza-shift)), -38%) rotate(34deg) scale(0.7);
     }
 
+    .pizza-card[data-position="-2"],
     .pizza-card[data-position="2"] {
-      z-index: 1;
-      opacity: 0.34;
+      z-index: 0;
+      opacity: 0;
       filter: saturate(0.68) brightness(0.62);
-      pointer-events: auto;
-      transform: translate(-50%, -76%) rotate(0deg) scale(0.56);
+      pointer-events: none;
+    }
+
+    .pizza-card[data-position="-2"] {
+      transform: translate(calc(-50% - var(--pizza-exit-shift)), -34%) rotate(-48deg) scale(0.5);
+    }
+
+    .pizza-card[data-position="2"] {
+      transform: translate(calc(-50% + var(--pizza-exit-shift)), -34%) rotate(48deg) scale(0.5);
     }
 
     .pizza-card:focus-visible {
@@ -2090,6 +2103,7 @@
 
       .pizza-deck {
         --pizza-shift: clamp(82px, 24vw, 112px);
+        --pizza-exit-shift: clamp(155px, 48vw, 220px);
         height: 360px;
       }
 
@@ -2111,9 +2125,12 @@
         transform: translate(calc(-50% + var(--pizza-shift)), -36%) rotate(35deg) scale(0.62);
       }
 
+      .pizza-card[data-position="-2"] {
+        transform: translate(calc(-50% - var(--pizza-exit-shift)), -34%) rotate(-46deg) scale(0.46);
+      }
+
       .pizza-card[data-position="2"] {
-        opacity: 0.28;
-        transform: translate(-50%, -72%) rotate(0deg) scale(0.5);
+        transform: translate(calc(-50% + var(--pizza-exit-shift)), -34%) rotate(46deg) scale(0.46);
       }
 
       .pizza-slider-footer {
@@ -2599,19 +2616,19 @@
       <div class="pizza-slider-shell">
         <div class="pizza-deck" id="pizza-deck" role="group" aria-label="Sélection de pizzas CAVA">
           <button class="pizza-card" type="button" data-pizza-index="0" aria-label="Voir la part Margherita">
-            <img src="../assets/pizza-slice-margherita.png" alt="Part de pizza Margherita CAVA" loading="lazy" decoding="async">
+            <img src="../assets/pizza-slice-margherita.png" alt="Part de pizza Margherita CAVA" loading="lazy" decoding="async" draggable="false">
           </button>
           <button class="pizza-card" type="button" data-pizza-index="1" aria-label="Voir la part Francesca">
-            <img src="../assets/pizza-slice-francesca.png" alt="Part de pizza Francesca CAVA" loading="lazy" decoding="async">
+            <img src="../assets/pizza-slice-francesca.png" alt="Part de pizza Francesca CAVA" loading="lazy" decoding="async" draggable="false">
           </button>
           <button class="pizza-card" type="button" data-pizza-index="2" aria-label="Voir la part Natalia">
-            <img src="../assets/pizza-slice-natalia.png" alt="Part de pizza Natalia CAVA" loading="lazy" decoding="async">
+            <img src="../assets/pizza-slice-natalia.png" alt="Part de pizza Natalia CAVA" loading="lazy" decoding="async" draggable="false">
           </button>
           <button class="pizza-card" type="button" data-pizza-index="3" aria-label="Voir la part Paola">
-            <img src="../assets/pizza-slice-paola.png" alt="Part de pizza Paola CAVA" loading="lazy" decoding="async">
+            <img src="../assets/pizza-slice-paola.png" alt="Part de pizza Paola CAVA" loading="lazy" decoding="async" draggable="false">
           </button>
           <button class="pizza-card pizza-card-more" type="button" data-pizza-index="4" aria-label="Découvrir les autres saveurs disponibles sur place">
-            <img src="../assets/pizza-slice-francesca.png" alt="Autres saveurs de pizza à découvrir chez CAVA" loading="lazy" decoding="async">
+            <img src="../assets/pizza-slice-francesca.png" alt="Autres saveurs de pizza à découvrir chez CAVA" loading="lazy" decoding="async" draggable="false">
             <span class="pizza-more-tag" aria-hidden="true">Et +</span>
           </button>
         </div>
@@ -2831,8 +2848,8 @@
     const pizzaDescription = document.getElementById("pizza-slider-description");
     const pizzaCount = document.getElementById("pizza-slider-count");
     let activePizza = 0;
-    let pizzaPointerStart = null;
-    let suppressPizzaClick = false;
+    let pizzaPointer = null;
+    let suppressPizzaClickUntil = 0;
 
     function relativePizzaPosition(index) {
       let position = (index - activePizza + pizzaSlides.length) % pizzaSlides.length;
@@ -2861,35 +2878,56 @@
 
     pizzaCards.forEach((card) => {
       card.addEventListener("click", (event) => {
-        if (suppressPizzaClick) {
-          event.preventDefault();
-          return;
-        }
         selectPizza(Number(card.dataset.pizzaIndex));
       });
     });
+
+    pizzaDeck.addEventListener("click", (event) => {
+      if (performance.now() >= suppressPizzaClickUntil) return;
+      event.preventDefault();
+      event.stopPropagation();
+    }, true);
 
     document.querySelector("[data-pizza-prev]").addEventListener("click", () => selectPizza(activePizza - 1));
     document.querySelector("[data-pizza-next]").addEventListener("click", () => selectPizza(activePizza + 1));
 
     pizzaDeck.addEventListener("pointerdown", (event) => {
-      pizzaPointerStart = event.clientX;
+      if (!event.isPrimary || (event.pointerType === "mouse" && event.button !== 0)) return;
+      pizzaPointer = {
+        id: event.pointerId,
+        x: event.clientX,
+        y: event.clientY
+      };
+
+      if (pizzaDeck.setPointerCapture) {
+        try {
+          pizzaDeck.setPointerCapture(event.pointerId);
+        } catch (error) {
+          // Safari may cancel capture when a vertical page scroll takes over.
+        }
+      }
     });
 
     pizzaDeck.addEventListener("pointerup", (event) => {
-      if (pizzaPointerStart === null) return;
-      const distance = event.clientX - pizzaPointerStart;
-      pizzaPointerStart = null;
-      if (Math.abs(distance) < 42) return;
-      suppressPizzaClick = true;
-      selectPizza(activePizza + (distance < 0 ? 1 : -1));
-      window.setTimeout(() => {
-        suppressPizzaClick = false;
-      }, 0);
+      if (!pizzaPointer || event.pointerId !== pizzaPointer.id) return;
+      const distanceX = event.clientX - pizzaPointer.x;
+      const distanceY = event.clientY - pizzaPointer.y;
+      pizzaPointer = null;
+
+      if (pizzaDeck.hasPointerCapture?.(event.pointerId)) {
+        pizzaDeck.releasePointerCapture(event.pointerId);
+      }
+
+      const isHorizontalSwipe = Math.abs(distanceX) >= 42 && Math.abs(distanceX) > Math.abs(distanceY);
+      if (!isHorizontalSwipe) return;
+
+      event.preventDefault();
+      suppressPizzaClickUntil = performance.now() + 650;
+      selectPizza(activePizza + (distanceX < 0 ? 1 : -1));
     });
 
-    pizzaDeck.addEventListener("pointercancel", () => {
-      pizzaPointerStart = null;
+    pizzaDeck.addEventListener("pointercancel", (event) => {
+      if (pizzaPointer && event.pointerId === pizzaPointer.id) pizzaPointer = null;
     });
 
     pizzaDeck.addEventListener("keydown", (event) => {
